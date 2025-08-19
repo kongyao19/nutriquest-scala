@@ -15,9 +15,15 @@ lazy val root = (project in file("."))
         case _                            => throw new Exception("Unknown platform!")
       }
       Seq("base", "controls", "fxml", "graphics", "media", "swing", "web")
-        .map(m => "org.openjfx" % s"javafx-$m" % "21.0.4" classifier osName)
+        .map(m => "org.openjfx" % s"javafx-$m" % "22.0.2" classifier osName)
     },
-    libraryDependencies ++= Seq("org.scalafx" %% "scalafx" % "21.0.0-R32")
+    libraryDependencies ++= Seq("org.scalafx" %% "scalafx" % "22.0.0-R33",
+      "org.scalikejdbc" %% "scalikejdbc"       % "4.3.0",
+      "com.h2database"  %  "h2"                % "2.2.224",
+      "org.apache.derby" % "derby" % "10.17.1.0",
+      "org.apache.derby" % "derbytools" % "10.17.1.0"
+
+    )
   )
 //enable for sbt-assembly
 //assembly / assemblyMergeStrategy := {
