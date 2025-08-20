@@ -1,13 +1,16 @@
 package nutriquest.model.game
 
+import javafx.util.Duration
 import nutriquest.model.{Direction, FoodFactory, Position}
 import nutriquest.model.entities.{Food, HealthyFood, Player, PowerUp, ScoreMultiplier, SpeedBoost}
+import scalafx.animation.PauseTransition
+import scalafx.Includes.*
 import scalafx.scene.input.KeyCode
 
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
-class GameState(gridSize: Int = 20):
+class GameState(gridSize: Int):
   private val grid = GameGrid(gridSize)
   private val player = Player(Position(gridSize / 2, gridSize / 2))
   private val random = Random()
@@ -40,20 +43,20 @@ class GameState(gridSize: Int = 20):
 
   private def generatePowerUps(count: Int): Unit =
     for _ <- 0 until count do
-      val powerUp = if random.nextBoolean() then 
+      val powerUp = if random.nextBoolean() then
         SpeedBoost(getRandomPosition())
-      else 
+      else
         ScoreMultiplier(getRandomPosition())
       powerUps += powerUp
       grid.placeItem(powerUp)
-      
+
   private def getRandomPosition(): Position =
     var pos: Position = Position(random.nextInt(gridSize), random.nextInt(gridSize))
-    while !grid.isEmpty(pos) do 
+    while !grid.isEmpty(pos) do
       pos = Position(random.nextInt(gridSize), random.nextInt(gridSize))
     pos
-    
-  def movePlayer(keyCode: KeyCode): Unit = 
+
+  def movePlayer(keyCode: KeyCode): Unit =
     if !gameRunning then return
     val direction = keyCode match
       case KeyCode.W => Some(Direction.up)
@@ -61,17 +64,16 @@ class GameState(gridSize: Int = 20):
       case KeyCode.A => Some(Direction.left)
       case KeyCode.D => Some(Direction.right)
       case _ => None
-  
+
     direction.foreach {dir =>
-      val newPosition = player.getPosition + dir
-      if player.canMoveTo(newPosition, gridSize) then 
-        grid.removeItem(player.getPosition)
-        player.move(dir)
-        checkCollisions()
-        grid.placeItem(player)
-        checkGameStatus()
+      val oldPos = player.getPosition
+      player.move(dir, gridSize)
+      grid.removeItem(oldPos)
+      grid.placeItem(player)
+      checkCollisions()
+      checkGameStatus()
     }
-    
+
   private def checkCollisions(): Unit =
     val playerPos = player.getPosition
     foods.find(food => food.getPosition == playerPos && !food.isCollected).foreach {food =>
@@ -83,7 +85,7 @@ class GameState(gridSize: Int = 20):
       powerUp.activate(player)
       grid.removeItem(powerUp.getPosition)
     }
-    
+
   private def checkGameStatus(): Unit =
     val currentTime = System.currentTimeMillis()
     val timeElapsed = currentTime - gameTime
@@ -93,20 +95,20 @@ class GameState(gridSize: Int = 20):
     }
     val healthyFoodsRemaining = foods.count(food => food.isInstanceOf[HealthyFood] && !food.isCollected)
     if healthyFoodsRemaining == 0 then {
-      endGame()
-      return
+      val pause = new PauseTransition(Duration.millis(100))
+      pause.onFinished = _ => endGame()
+      pause.play()
     }
-    
+
   def getPlayer: Player = player
-  
+
   def getGrid: GameGrid = grid
-  
+
   def getAllFoods: List[Food] = foods.toList
-  
+
   def getAllPowerUps: List[PowerUp] = powerUps.toList
-  
+
   def isGameRunning: Boolean = gameRunning
-  
+
   def getRemainingTime: Long = math.max(0, maxGameTime - (System.currentTimeMillis() - gameTime))
-    
-        
+

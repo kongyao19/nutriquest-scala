@@ -18,11 +18,9 @@ class Player(private var position: Position) extends Drawable, Movable:
   
   def getSymbol: String = "😊"
   
-  def move(direction: Position): Unit =
-    position += direction
-    
-  def canMoveTo(newPosition: Position, gridSize: Int): Boolean =
-    newPosition.isValidOn(gridSize)
+  def move(direction: Position, gridSize: Int): Unit =
+    val newPos = position + direction
+    if newPos.isValidOn(gridSize) then position = newPos
     
   def addScore(points: Int): Unit =
     val finalPoints = if scoreMultiplierActive then points * 2 else points

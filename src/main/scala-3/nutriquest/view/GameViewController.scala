@@ -41,8 +41,8 @@ class GameViewController:
 
   private val gameManager = new GameManager()
   private var gameLoop: Timeline = null
-  private val gridSize = 20
-  private val cellSize = 25
+  private val gridSize = 10
+  private val cellSize = 15
 
   private val gridCells: Array[Array[Rectangle]] = Array.ofDim(gridSize, gridSize)
 
@@ -59,6 +59,9 @@ class GameViewController:
 
   private def setupGameGrid(): Unit =
     gameGrid.children.clear()
+
+    gameGrid.setPrefSize(gridSize * cellSize, gridSize * cellSize)
+    gameGrid.setMaxSize(gridSize * cellSize, gridSize * cellSize)
 
     for
       row <- 0 until gridSize

@@ -10,9 +10,7 @@ trait Drawable:
   def getPosition: Position
 
 trait Movable:
-  def move(direction: Position): Unit
-
-  def canMoveTo(position: Position, gridSize: Int): Boolean
+  def move(direction: Position, gridSize: Int): Unit
 
 trait Collectible: 
   def collect(): Unit
