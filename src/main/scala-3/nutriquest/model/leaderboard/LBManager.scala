@@ -15,10 +15,10 @@ class LBManager:
     leaderboard.clear()
     leaderboard ++= sortedEntries
 
-  def getTopScores: List[Entry] =
+  def getAllScores: List[Entry] =
     leaderboard.sortBy(-_.score).toList
 
-  def getTopScores(limit: Int): List[Entry] =
+  def getTopScores(limit: Int = maxEntries): List[Entry] =
     leaderboard.sortBy(-_.score).take(limit).toList
 
   def isHighScore(score: Int): Boolean =
