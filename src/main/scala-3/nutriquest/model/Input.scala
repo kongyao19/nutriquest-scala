@@ -1,9 +1,9 @@
 package nutriquest.model
 
-object Input{
-  @volatile var wPressed: Boolean = false
-  @volatile var aPressed: Boolean = false
-  @volatile var sPressed: Boolean = false
-  @volatile var dPressed: Boolean = false
-  @volatile var spacePressed: Boolean = false
-}
+object Input:
+  var wPressed = false
+  var aPressed = false
+  var sPressed = false
+  var dPressed = false
+  var spacePressed = false
+  var qPressed = false

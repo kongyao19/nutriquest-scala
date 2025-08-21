@@ -1,18 +1,14 @@
 package nutriquest.model
 
-import scalafx.scene.paint.Color
-
-trait Drawable:
-  def getColor: Color
-
-  def getSymbol: String
-
-  def getPosition: Position
+import nutriquest.model.entities.Player
 
 trait Movable:
-  def move(direction: Position, gridSize: Int): Unit
+  var movingSpeed: Double
 
-trait Collectible: 
-  def collect(): Unit
-  
-  def isCollected: Boolean
+trait Collectible:
+  def onCollect(player: Player): Unit
+
+trait Positionable:
+  def posX: Double
+
+  def posY: Double
