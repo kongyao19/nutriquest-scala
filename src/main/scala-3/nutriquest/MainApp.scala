@@ -15,15 +15,6 @@ import scalafx.scene.layout.AnchorPane
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
 
-//import javafx.fxml.FXMLLoader
-//import nutriquest.model.game.GameManager
-//import scalafx.application.JFXApp3
-//import scalafx.application.JFXApp3.PrimaryStage
-//import scalafx.Includes.*
-//import scalafx.scene.Scene
-//
-//import java.net.URL
-
 object MainApp extends JFXApp3:
   // Global managers
   val gameManager = GameManager()
