@@ -1,56 +1,38 @@
 package nutriquest.model.entities
 
-import nutriquest.model.{Drawable, Movable, NutritionValue, Position}
-import scalafx.scene.paint.Color
+import nutriquest.model.{Input, Movable}
 
-import scala.collection.mutable.ListBuffer
+class Player extends GameEntity(550, 350, "player.png") with Movable:
+  // Player stats
+  var score: Int = 0
 
-class Player(private var position: Position) extends Drawable, Movable:
-  private var score: Int = 0
-  private var nutrition: NutritionValue = NutritionValue()
-  private var activePowerUps: ListBuffer[PowerUp] = ListBuffer()
-  private var speedBoostActive: Boolean = false
-  private var scoreMultiplierActive: Boolean = false
-  
-  def getPosition: Position = position
-  
-  def getColor: Color = Color.Blue
-  
-  def getSymbol: String = "😊"
-  
-  def move(direction: Position, gridSize: Int): Unit =
-    val newPos = position + direction
-    if newPos.isValidOn(gridSize) then position = newPos
-    
+  // Movement (constant speed)
+  var movingSpeed: Double = 8.0
+
+  // Add points to score
   def addScore(points: Int): Unit =
-    val finalPoints = if scoreMultiplierActive then points * 2 else points
-    score += finalPoints
-    
-  def addNutrition(nutritionValue: NutritionValue): Unit =
-    nutrition += nutritionValue
-    
-  def applyJunkPenalty(penalty: Int): Unit =
-    println(s"Junk food penalty applied: $penalty")
-    
-  def activateSpeedBoost(): Unit = speedBoostActive = true
+    score += points
+
+object Player extends Movable:
+  var movingSpeed: Double = 8.0
+
+  def apply(): Player = new Player()
   
-  def deactivateSpeedBoost(): Unit = speedBoostActive = false
-  
-  def activateScoreMultiplier(): Unit = scoreMultiplierActive = true
-  
-  def deactivateScoreMultiplier(): Unit = scoreMultiplierActive = false
-  
-  def getScore: Int = score
-  
-  def getNutrition: NutritionValue = nutrition
-  
-  def hasSpeedBoost: Boolean = speedBoostActive
-  
-  def hasScoreMultiplier: Boolean = scoreMultiplierActive
-  
-  def getHealth: String =
-    val healthScore = nutrition.overallScore
-    if healthScore >= 100 then "Excellent!"
-    else if healthScore >= 50 then "Good"
-    else if healthScore >= 0 then "Fair"
-    else "Poor"
+  def move(player: Player): Unit =
+    if Input.wPressed then
+      if player.posY > 0 then
+        player.imageView.y = player.posY - player.movingSpeed
+
+    if Input.aPressed then
+      if player.posX > 0 then
+        player.imageView.x = player.posX - player.movingSpeed
+        player.imageView.scaleX = -1 // Flip character to face left
+
+    if Input.sPressed then
+      if player.posY < 700 then
+        player.imageView.y = player.posY + player.movingSpeed
+
+    if Input.dPressed then
+      if player.posX < 1100 then
+        player.imageView.x = player.posX + player.movingSpeed
+        player.imageView.scaleX = 1 // Flip character back to face right
