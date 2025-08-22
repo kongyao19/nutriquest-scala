@@ -101,7 +101,6 @@ class GameController {
   private def refreshFoodOnScreen(): Unit = {
     // Remove all existing food from scene
     val toRemove = gameArea.children.filter(node => {
-      // This is a simple way - you might need to adjust based on how you identify food nodes
       node != MainApp.gameManager.player.imageView && !node.isInstanceOf[Rectangle]
     })
     gameArea.children.removeAll(toRemove.toSeq: _*)
@@ -121,9 +120,9 @@ class GameController {
 
     // Change time color when running low
     val remainingTime = MainApp.gameManager.getRemainingTime
-    if remainingTime <= 30 then
+    if remainingTime <= 10 then
       timeLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;")
-    else if remainingTime <= 60 then
+    else if remainingTime <= 20 then
       timeLabel.setStyle("-fx-text-fill: orange; -fx-font-weight: bold;")
     else
       timeLabel.setStyle("-fx-text-fill: lightgreen; -fx-font-weight: bold;")

@@ -17,7 +17,7 @@ class GameManager:
   var unhealthyFoodGroup: ListBuffer[UnhealthyFood] = ListBuffer.empty
 
   // Game timer (in seconds)
-  var gameTimeLimit: Double = 120.0 // 2 minutes
+  var gameTimeLimit: Double = 30.0 // 30 seconds
   var currentGameTime: Double = 0.0
 
   // Map generation settings
@@ -73,11 +73,6 @@ class GameManager:
           pauseGame()
           Input.spacePressed = false
 
-      case GameState.GameOver =>
-        if Input.qPressed then
-          MainApp.showQuitConfirmation()
-          Input.qPressed = false
-
       case _ => // Handle other states in the UI layer
 
   private def checkCollisions(): Unit =
@@ -106,17 +101,75 @@ class GameManager:
     healthyFoodGroup.clear()
     unhealthyFoodGroup.clear()
 
+    // Minimum distance between food items
+    val minDistance = 80.0
+    val maxAttempts = 100 // Prevent infinite loops
+
+    // Keep track of all occupied positions
+    val occupiedPositions = scala.collection.mutable.ListBuffer[(Double, Double)]()
+
+    // Add player position to avoid spawning food on player
+    occupiedPositions += ((player.posX, player.posY))
+
     // Generate healthy foods
     for _ <- 1 to healthyFoodPerMap do
-      val x = Random.nextDouble() * (gameWidth - 100) + 50 // Leave margins
-      val y = Random.nextDouble() * (gameHeight - 100) + 50
-      healthyFoodGroup += HealthyFood.generateRandom(x, y)
+      var placed = false
+      var attempts = 0
+
+      while !placed && attempts < maxAttempts do
+        val x = Random.nextDouble() * (gameWidth - 100) + 50
+        val y = Random.nextDouble() * (gameHeight - 100) + 50
+
+        // Check if this position is too close to any existing position
+        val tooClose = occupiedPositions.exists { case (existingX, existingY) =>
+          val distance = math.sqrt(math.pow(x - existingX, 2) + math.pow(y - existingY, 2))
+          distance < minDistance
+        }
+
+        if !tooClose then
+          healthyFoodGroup += HealthyFood.generateRandom(x, y)
+          occupiedPositions += ((x, y))
+          placed = true
+
+        attempts += 1
 
     // Generate unhealthy foods
     for _ <- 1 to unhealthyFoodPerMap do
-      val x = Random.nextDouble() * (gameWidth - 100) + 50
-      val y = Random.nextDouble() * (gameHeight - 100) + 50
-      unhealthyFoodGroup += UnhealthyFood.generateRandom(x, y)
+      var placed = false
+      var attempts = 0
+
+      while !placed && attempts < maxAttempts do
+        val x = Random.nextDouble() * (gameWidth - 100) + 50
+        val y = Random.nextDouble() * (gameHeight - 100) + 50
+
+        // Check if this position is too close to any existing position
+        val tooClose = occupiedPositions.exists { case (existingX, existingY) =>
+          val distance = math.sqrt(math.pow(x - existingX, 2) + math.pow(y - existingY, 2))
+          distance < minDistance
+        }
+
+        if !tooClose then
+          unhealthyFoodGroup += UnhealthyFood.generateRandom(x, y)
+          occupiedPositions += ((x, y))
+          placed = true
+
+        attempts += 1
+//  private def generateNewMap(): Unit =
+//    // Clear existing food
+//    healthyFoodGroup.clear()
+//    unhealthyFoodGroup.clear()
+//
+//    // Generate healthy foods
+//    for _ <- 1 to healthyFoodPerMap do
+//      val x = Random.nextDouble() * (gameWidth - 100) + 50 // Leave margins
+//      val y = Random.nextDouble() * (gameHeight - 100) + 50
+//      healthyFoodGroup += HealthyFood.generateRandom(x, y)
+//
+//    // Generate unhealthy foods
+//    for _ <- 1 to unhealthyFoodPerMap do
+//      val x = Random.nextDouble() * (gameWidth - 100) + 50
+//      val y = Random.nextDouble() * (gameHeight - 100) + 50
+//      unhealthyFoodGroup += UnhealthyFood.generateRandom(x, y)
 
   // Getter methods for UI
   def getHealthyFoods: List[HealthyFood] = healthyFoodGroup.toList

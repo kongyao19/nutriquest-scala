@@ -1,9 +1,8 @@
 package nutriquest.model.entities
 
-import nutriquest.model.Positionable
 import scalafx.scene.image.{Image, ImageView}
 
-abstract class GameEntity(_x: Double, _y: Double, _imagePath: String) extends Positionable:
+abstract class GameEntity(_x: Double, _y: Double, _imagePath: String):
   // Load the image from the specified path
   private val image = new Image(_imagePath)
 

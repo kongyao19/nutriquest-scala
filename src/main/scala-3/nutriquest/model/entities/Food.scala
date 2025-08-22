@@ -1,12 +1,12 @@
 package nutriquest.model.entities
 
-import nutriquest.model.{Collectible, NutritionTypes}
+import nutriquest.model.NutritionTypes
 
 import scala.util.Random
 
 // General Food class
 abstract class Food(_x: Double, _y: Double, _imagePath: String, val nutritionType: NutritionTypes, val pointValue: Int)
-  extends GameEntity(_x, _y, _imagePath) with Collectible:
+  extends GameEntity(_x, _y, _imagePath):
 
   def getPointValue: Int = pointValue
 
