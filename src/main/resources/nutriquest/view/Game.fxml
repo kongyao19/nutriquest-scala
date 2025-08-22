@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.Group?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutriquest.view.GameController">
+    <children>
+        <!-- Game Area (where all game objects will be added programmatically) -->
+        <Group fx:id="gameArea" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
+
+        <!-- HUD at the top -->
+        <HBox AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" spacing="30.0" style="-fx-background-color: rgba(0,0,0,0.7); -fx-padding: 15;">
+            <children>
+                <Label text="Score:" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="scoreLabel" text="0" textFill="YELLOW">
+                    <font>
+                        <Font name="Arial Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Label text="Time:" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="timeLabel" text="02:00" textFill="LIGHTGREEN">
+                    <font>
+                        <Font name="Arial Bold" size="18.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+
+        <!-- Pause Text (initially hidden) -->
+        <Label fx:id="pauseLabel" layoutX="400.0" layoutY="350.0" text="GAME PAUSED - Press SPACE to Resume" textFill="WHITE" visible="false">
+            <font>
+                <Font name="Arial Bold" size="24.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

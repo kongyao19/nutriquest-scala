@@ -90,69 +90,12 @@ object MainApp extends JFXApp3:
     this.roots.center = leaderboardRoot
 
   def showGame(): Unit =
-    roots.center = new AnchorPane():
-      children = new Group() {}
-
-      // Start the game
-      gameManager.startGame()
-
-      // Add background
-      children.add(Rectangle(1200, 800, Color.DarkGreen))
-
-      // Add player
-      children.add(gameManager.player.imageView)
-
-      // Add initial food items
-      gameManager.getHealthyFoods.foreach(food => children.add(food.imageView))
-      gameManager.getUnhealthyFoods.foreach(food => children.add(food.imageView))
-
-      // Game loop timer
-      var lastTimer = 0L
-      var firstFrame = true
-      var pauseText: scalafx.scene.text.Text = null
-
-      val timer: AnimationTimer = AnimationTimer(t => {
-        val delta = if firstFrame then
-          firstFrame = false
-          lastTimer = t
-          0.0  // Don't update on first frame
-        else
-          (t - lastTimer) / 1e9
-
-        // Update game logic only if delta is valid
-        if delta > 0 then
-          gameManager.update(delta)
-
-        // Handle game states
-        gameManager.gameState match
-          case nutriquest.model.game.GameState.Playing =>
-            // Remove pause text if it exists
-            if pauseText != null then
-              children.remove(pauseText)
-              pauseText = null
-
-          case nutriquest.model.game.GameState.Paused =>
-            // Add pause text only if it doesn't exist
-            if pauseText == null then
-              pauseText = new scalafx.scene.text.Text("GAME PAUSED - Press SPACE to Resume"):
-                x = 400
-                y = 400
-                style = "-fx-font-size: 24px; -fx-fill: white;"
-              children.add(pauseText)
-
-          case nutriquest.model.game.GameState.GameOver =>
-            timer.stop()
-            showGameOver()
-
-          case nutriquest.model.game.GameState.MainMenu =>
-            timer.stop()
-            showMainMenu()
-
-          case _ =>
-
-        lastTimer = t
-      })
-      timer.start()
+    val resource = getClass.getResource("view/Game.fxml")
+    val loader = new FXMLLoader(resource)
+    loader.load()
+    val controller = loader.getController[nutriquest.view.GameController]()
+    val gameRoot = loader.getRoot[jfxs.layout.AnchorPane]
+    this.roots.center = gameRoot
 
   def showGameOver(): Unit =
     val resource = getClass.getResource("view/GameOver.fxml")

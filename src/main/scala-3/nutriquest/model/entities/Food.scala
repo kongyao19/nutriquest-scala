@@ -45,10 +45,10 @@ object UnhealthyFood:
 
 // Helper functions for food generation
 private def getImagePath(nutritionType: NutritionTypes): String = nutritionType match
-  case NutritionTypes.Protein => "/nutriquest/images/sid.jpg"
-  case NutritionTypes.Vitamin => "/nutriquest/images/sid.jpg"
-  case NutritionTypes.Carbs => "/nutriquest/images/sid.jpg"
-  case NutritionTypes.Healthy_Fats => "/nutriquest/images/sid.jpg"
+  case NutritionTypes.Protein => "/nutriquest/images/protein.jpg"
+  case NutritionTypes.Vitamin => "/nutriquest/images/vitamin.jpg"
+  case NutritionTypes.Carbs => "/nutriquest/images/carbs.jpg"
+  case NutritionTypes.Healthy_Fats => "/nutriquest/images/fats.jpg"
   case NutritionTypes.Junk => "/nutriquest/images/apple.jpg"
 
 private def getPointValue(nutritionType: NutritionTypes): Int = nutritionType match
