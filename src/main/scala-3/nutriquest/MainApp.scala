@@ -17,25 +17,28 @@ import scalafx.scene.shape.Rectangle
 
 object MainApp extends JFXApp3:
   // Global managers
-  val gameManager = GameManager()
-  val leaderboardManager = LBManager()
+  var gameManager: GameManager = null
+  var leaderboardManager: LBManager = null
+
   var roots: scalafx.scene.layout.BorderPane = null
-  
+
   override def start(): Unit =
+    gameManager = GameManager()
+    leaderboardManager = LBManager()
+
     // Load root layout
     val rootResource = getClass.getResource("view/RootLayout.fxml")
     val loader = new FXMLLoader(rootResource)
     loader.load()
     roots = loader.getRoot[jfxs.layout.BorderPane]
-  
+
     // Initialize stage
     stage = new PrimaryStage:
       title = "NutriQuest🍌 - Nutrition Adventure Game"
-      resizable = false
       scene = new Scene:
-        stylesheets += getClass.getResource("view/GameTheme.css").toString
+//        stylesheets += getClass.getResource("view/GameTheme.css").toString
         root = roots
-  
+
         // Set up key event handling
         onKeyPressed = (e: KeyEvent) => {
           e.code match
@@ -47,7 +50,7 @@ object MainApp extends JFXApp3:
             case KeyCode.Space => Input.spacePressed = !Input.spacePressed
             case _ =>
         }
-  
+
         onKeyReleased = (e: KeyEvent) => {
           e.code match
             case KeyCode.W => Input.wPressed = false
@@ -58,7 +61,7 @@ object MainApp extends JFXApp3:
             case _ =>
         }
     showMainMenu()
-    
+
   // Navigation methods
   def showMainMenu(): Unit =
     val resource = getClass.getResource("view/MainMenu.fxml")
@@ -102,11 +105,18 @@ object MainApp extends JFXApp3:
 
       // Game loop timer
       var lastTimer = 0L
+      var firstFrame = true
       val timer: AnimationTimer = AnimationTimer(t => {
-        val delta = (t - lastTimer) / 1e9
+        val delta = if firstFrame then
+          firstFrame = false
+          lastTimer = t
+          0.0  // Don't update on first frame
+        else
+          (t - lastTimer) / 1e9
 
-        // Update game logic
-        gameManager.update(delta)
+        // Update game logic only if delta is valid
+        if delta > 0 then
+          gameManager.update(delta)
 
         // Handle game states
         gameManager.gameState match

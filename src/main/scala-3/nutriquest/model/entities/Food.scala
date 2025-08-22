@@ -32,7 +32,7 @@ object HealthyFood:
 
 // Unhealthy Food class  
 class UnhealthyFood(x: Double, y: Double)
-  extends Food(x, y, "junk_food.png", NutritionTypes.Junk, -10):
+  extends Food(x, y, "/nutriquest/images/apple.jpg", NutritionTypes.Junk, -10):
 
   def onCollect(player: Player): Unit =
     player.addScore(pointValue) // Negative points
@@ -45,11 +45,11 @@ object UnhealthyFood:
 
 // Helper functions for food generation
 private def getImagePath(nutritionType: NutritionTypes): String = nutritionType match
-  case NutritionTypes.Protein => "protein.png"
-  case NutritionTypes.Vitamin => "vitamin.png"
-  case NutritionTypes.Carbs => "carbs.png"
-  case NutritionTypes.Healthy_Fats => "healthy_fats.png"
-  case NutritionTypes.Junk => "junk_food.png"
+  case NutritionTypes.Protein => "/nutriquest/images/sid.jpg"
+  case NutritionTypes.Vitamin => "/nutriquest/images/sid.jpg"
+  case NutritionTypes.Carbs => "/nutriquest/images/sid.jpg"
+  case NutritionTypes.Healthy_Fats => "/nutriquest/images/sid.jpg"
+  case NutritionTypes.Junk => "/nutriquest/images/apple.jpg"
 
 private def getPointValue(nutritionType: NutritionTypes): Int = nutritionType match
   case NutritionTypes.Protein => 15

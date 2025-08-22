@@ -2,7 +2,7 @@ package nutriquest.model.entities
 
 import nutriquest.model.{Input, Movable}
 
-class Player extends GameEntity(550, 350, "player.png") with Movable:
+class Player extends GameEntity(550, 350, "/nutriquest/images/sid.jpg") with Movable:
   // Player stats
   var score: Int = 0
 
