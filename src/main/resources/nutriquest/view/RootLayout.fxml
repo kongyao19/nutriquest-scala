@@ -21,7 +21,7 @@
                 </Menu>
                 <Menu text="_Edit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <MenuItem onAction="#handleReset" text="_Reset" />
                     </items>
                 </Menu>
                 <Menu text="_Help">
