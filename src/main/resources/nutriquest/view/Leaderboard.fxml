@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutriquest.view.LeaderboardController">
+    <children>
+        <Label layoutX="320.0" layoutY="30.0" text="Leaderboard" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="30.0">
+            <font>
+                <Font name="System Bold" size="32.0" />
+            </font>
+        </Label>
+        <TableView fx:id="leaderboardTable" layoutX="100.0" layoutY="80.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="80.0">
+            <columns>
+                <TableColumn fx:id="rankColumn" prefWidth="80.0" text="Rank" />
+                <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Player Name" />
+                <TableColumn fx:id="scoreColumn" prefWidth="100.0" text="Score" />
+                <TableColumn fx:id="dateColumn" prefWidth="150.0" text="Date" />
+            </columns>
+        </TableView>
+        <HBox alignment="CENTER" layoutX="250.0" layoutY="500.0" spacing="20.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="250.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleBackToMenu" text="Back to Menu" />
+                <Button mnemonicParsing="false" onAction="#handleClearLeaderboard" text="Clear All Scores" />
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

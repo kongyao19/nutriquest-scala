@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutriquest.view.InstructionsController">
+    <children>
+        <Label layoutX="300.0" layoutY="30.0" text="How to Play" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="30.0">
+            <font>
+                <Font name="System Bold" size="32.0" />
+            </font>
+        </Label>
+        <ScrollPane layoutX="50.0" layoutY="80.0" prefHeight="450.0" prefWidth="700.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="80.0">
+            <content>
+                <VBox spacing="15.0">
+                    <children>
+                        <Label text="Objective:">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Label>
+                        <Label text="Navigate through the nutrition adventure world, collect healthy foods, and avoid junk food to maintain your health score. The goal is to achieve the highest score possible while learning about nutrition!" wrapText="true">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label text="Controls:">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Label>
+                        <Label text="Use WASD keys or arrow keys to move your character around the game world. Press SPACE to interact with special items or power-ups." wrapText="true">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label text="Food Types &amp; Points:">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Label>
+                        <Label text="• Fruits and Vegetables: +10 points each&#10;• Whole Grains: +8 points each&#10;• Lean Proteins: +12 points each&#10;• Dairy Products: +6 points each&#10;• Junk Food: -15 points each&#10;• Sugary Drinks: -20 points each" wrapText="true">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label text="Game Mechanics:">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Label>
+                        <Label text="Your health decreases over time, so you need to collect healthy foods to maintain it. If your health reaches zero, the game ends. Bonus multipliers appear randomly and can double your points for a limited time!" wrapText="true">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label text="Tips:">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Label>
+                        <Label text="• Prioritize fruits and vegetables for consistent health recovery&#10;• Avoid junk food areas when your health is low&#10;• Look for bonus multipliers to maximize your score&#10;• Learn the nutritional value of different foods as you play!" wrapText="true">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+        <Button layoutX="350.0" layoutY="550.0" mnemonicParsing="false" onAction="#handleBackToMenu" text="Back to Menu" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="350.0" />
+    </children>
+</AnchorPane>

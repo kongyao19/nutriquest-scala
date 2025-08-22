@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutriquest.view.MainMenuController">
+    <children>
+        <Label layoutX="250.0" layoutY="80.0" styleClass="title-label" text="NutriQuest" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="80.0">
+            <font>
+                <Font name="System Bold" size="48.0" />
+            </font>
+        </Label>
+        <Label layoutX="275.0" layoutY="140.0" styleClass="subtitle-label" text="Nutrition Adventure Game" AnchorPane.leftAnchor="275.0" AnchorPane.topAnchor="140.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <VBox alignment="CENTER" layoutX="300.0" layoutY="220.0" spacing="20.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="220.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleStartGame" prefWidth="200.0" text="Start Game" />
+                <Button mnemonicParsing="false" onAction="#handleInstructions" prefWidth="200.0" text="How to Play" />
+                <Button mnemonicParsing="false" onAction="#handleLeaderboard" prefWidth="200.0" text="Leaderboard" />
+                <Button mnemonicParsing="false" onAction="#handleQuit" prefWidth="200.0" styleClass="menu-button-danger" text="Quit Game" />
+            </children>
+        </VBox>
+        <Label layoutX="20.0" layoutY="560.0" text="Version 1.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
+    </children>
+</AnchorPane>

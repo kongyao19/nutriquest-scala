@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutriquest.view.GameOverController">
+    <children>
+        <Label layoutX="280.0" layoutY="80.0" styleClass="game-over-title" text="Game Over!" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="80.0">
+            <font>
+                <Font name="System Bold" size="42.0" />
+            </font>
+        </Label>
+        <Label fx:id="finalScoreLabel" layoutX="300.0" layoutY="150.0" text="Final Score: 0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="150.0">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+        <VBox alignment="CENTER" layoutX="250.0" layoutY="220.0" spacing="15.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="220.0">
+            <children>
+                <Label text="Enter your name for the leaderboard:">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="playerNameField" maxWidth="300.0" promptText="Your Name" />
+            </children>
+        </VBox>
+        <VBox alignment="CENTER" layoutX="300.0" layoutY="350.0" spacing="15.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="350.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleSaveScore" prefWidth="200.0" text="Save Score" />
+                <Button mnemonicParsing="false" onAction="#handlePlayAgain" prefWidth="200.0" text="Play Again" />
+                <Button mnemonicParsing="false" onAction="#handleBackToMenu" prefWidth="200.0" text="Back to Menu" />
+            </children>
+        </VBox>
+        <Label layoutX="220.0" layoutY="500.0" text="Great job! Challenge yourself to beat this score!" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="220.0" />
+    </children>
+</AnchorPane>
