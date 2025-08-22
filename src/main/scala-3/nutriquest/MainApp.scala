@@ -4,14 +4,11 @@ import javafx.fxml.FXMLLoader
 import javafx.scene as jfxs
 import nutriquest.model.Input
 import nutriquest.model.game.GameManager
-import nutriquest.model.leaderboard.LBManager
 import nutriquest.util.Database
 import scalafx.Includes.*
+import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
-import scalafx.application.{JFXApp3, Platform}
 import scalafx.scene.Scene
-import scalafx.scene.control.Alert.AlertType
-import scalafx.scene.control.{Alert, ButtonType}
 import scalafx.scene.input.{KeyCode, KeyEvent}
 
 
@@ -41,9 +38,15 @@ object MainApp extends JFXApp3:
     // Initialize stage
     stage = new PrimaryStage:
       title = "NutriQuest🍌 - Nutrition Adventure Game"
+      resizable = true
+      minWidth = 800
+      minHeight = 600
+      width = 1200
+      height = 800
       scene = new Scene:
 //        stylesheets += getClass.getResource("view/GameTheme.css").toString
         root = roots
+//        fill = Color.Black
 
         // Set up key event handling
         onKeyPressed = (e: KeyEvent) => {
@@ -117,23 +120,3 @@ object MainApp extends JFXApp3:
     controller.setFinalScore(gameManager.getCurrentScore)
     val gameOverRoot = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.center = gameOverRoot
-
-  def showQuitConfirmation(): Unit =
-    // Pause the game first
-    if gameManager.gameState == nutriquest.model.game.GameState.Playing then
-      gameManager.pauseGame()
-
-    Platform.runLater(() => {
-      val alert = new Alert(AlertType.Confirmation):
-        title = "Quit Game"
-        headerText = "Are you sure you want to quit?"
-        contentText = "Your current progress will be lost."
-
-      val result = alert.showAndWait()
-      result match
-        case Some(ButtonType.OK) =>
-          gameManager.gameState = nutriquest.model.game.GameState.MainMenu
-        case _ =>
-          if gameManager.gameState == nutriquest.model.game.GameState.Paused then
-            gameManager.pauseGame()
-    })

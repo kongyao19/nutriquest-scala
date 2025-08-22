@@ -1,8 +1,10 @@
 package nutriquest.model.game
 
-import nutriquest.MainApp
 import nutriquest.model.Input
 import nutriquest.model.entities.{HealthyFood, Player, UnhealthyFood}
+import scalafx.application.Platform
+import scalafx.scene.control.{Alert, ButtonType}
+import scalafx.scene.control.Alert.AlertType
 
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
@@ -17,19 +19,42 @@ class GameManager:
   var unhealthyFoodGroup: ListBuffer[UnhealthyFood] = ListBuffer.empty
 
   // Game timer (in seconds)
-  var gameTimeLimit: Double = 30.0 // 30 seconds
+  var gameTimeLimit: Double = 30.0
   var currentGameTime: Double = 0.0
 
-  // Map generation settings
-  private val gameWidth = 1100
-  private val gameHeight = 700
+  // Map generation settings - these will be updated dynamically
+  private var gameWidth = 800.0
+  private var gameHeight = 600.0
   private val healthyFoodPerMap = 15
   private val unhealthyFoodPerMap = 8
+
+  def updateGameBounds(width: Double, height: Double): Unit =
+    gameWidth = width
+    gameHeight = height
+    println(s"GameManager bounds updated to: $width x $height")
+
+    // Update player movement bounds
+    Player.setGameBounds(width, height)
+
+    // Ensure player stays within new bounds
+    val playerSize = 50.0
+    player.posX = math.min(player.posX, width - playerSize)
+    player.posY = math.min(player.posY, height - playerSize)
+    player.posX = math.max(player.posX, 0)
+    player.posY = math.max(player.posY, 0)
 
   def startGame(): Unit =
     gameState = GameState.Playing
     player = Player()
     currentGameTime = 0.0
+
+  def startGameWithBounds(width: Double, height: Double): Unit =
+    gameState = GameState.Playing
+    player = Player()
+    currentGameTime = 0.0
+
+    // Set bounds first, then generate map
+    updateGameBounds(width, height)
     generateNewMap()
 
   def pauseGame(): Unit =
@@ -37,6 +62,24 @@ class GameManager:
       gameState = GameState.Paused
     else if gameState == GameState.Paused then
       gameState = GameState.Playing
+
+  def showQuitConfirmation(): Unit =
+    // Pause the game first
+    if gameState == GameState.Playing then pauseGame()
+
+    Platform.runLater(() => {
+      val alert = new Alert(AlertType.Confirmation):
+        title = "Quit Game"
+        headerText = "Are you sure you want to quit?"
+        contentText = "Your current progress will be lost."
+
+      val result = alert.showAndWait()
+      result match
+        case Some(ButtonType.OK) =>
+          gameState = GameState.MainMenu
+        case _ =>
+          if gameState == GameState.Paused then pauseGame()
+    })
 
   def update(deltaTime: Double): Unit =
     gameState match
@@ -65,7 +108,7 @@ class GameManager:
 
         // Check for quit to main menu
         if Input.qPressed then
-          MainApp.showQuitConfirmation()
+          showQuitConfirmation()
           Input.qPressed = false
 
       case GameState.Paused =>
@@ -87,7 +130,7 @@ class GameManager:
       else
         true // Keep in list
 
-    // Check unhealthy food collisions  
+    // Check unhealthy food collisions
     unhealthyFoodGroup.filterInPlace: food =>
       val distance = math.sqrt(math.pow(player.posX - food.posX, 2) + math.pow(player.posY - food.posY, 2))
       if distance < collisionDistance then
@@ -101,9 +144,13 @@ class GameManager:
     healthyFoodGroup.clear()
     unhealthyFoodGroup.clear()
 
-    // Minimum distance between food items
+    println(s"Generating map with bounds: $gameWidth x $gameHeight")
+
+    // Minimum distance between food items and edge buffer
     val minDistance = 80.0
-    val maxAttempts = 100 // Prevent infinite loops
+    val maxAttempts = 100
+    val edgeBuffer = 50.0 // Keep food away from edges
+    val playerSize = 50.0
 
     // Keep track of all occupied positions
     val occupiedPositions = scala.collection.mutable.ListBuffer[(Double, Double)]()
@@ -111,14 +158,23 @@ class GameManager:
     // Add player position to avoid spawning food on player
     occupiedPositions += ((player.posX, player.posY))
 
+    // Calculate usable area (accounting for food size and edge buffer)
+    val usableWidth = gameWidth - (edgeBuffer * 2) - playerSize
+    val usableHeight = gameHeight - (edgeBuffer * 2) - playerSize
+
+    if (usableWidth <= 0 || usableHeight <= 0) {
+      println(s"Invalid game bounds for food generation! Width: $usableWidth, Height: $usableHeight")
+      return
+    }
+
     // Generate healthy foods
     for _ <- 1 to healthyFoodPerMap do
       var placed = false
       var attempts = 0
 
       while !placed && attempts < maxAttempts do
-        val x = Random.nextDouble() * (gameWidth - 100) + 50
-        val y = Random.nextDouble() * (gameHeight - 100) + 50
+        val x = Random.nextDouble() * usableWidth + edgeBuffer
+        val y = Random.nextDouble() * usableHeight + edgeBuffer
 
         // Check if this position is too close to any existing position
         val tooClose = occupiedPositions.exists { case (existingX, existingY) =>
@@ -133,14 +189,17 @@ class GameManager:
 
         attempts += 1
 
+      if attempts >= maxAttempts then
+        println(s"Failed to place healthy food after $maxAttempts attempts")
+
     // Generate unhealthy foods
     for _ <- 1 to unhealthyFoodPerMap do
       var placed = false
       var attempts = 0
 
       while !placed && attempts < maxAttempts do
-        val x = Random.nextDouble() * (gameWidth - 100) + 50
-        val y = Random.nextDouble() * (gameHeight - 100) + 50
+        val x = Random.nextDouble() * usableWidth + edgeBuffer
+        val y = Random.nextDouble() * usableHeight + edgeBuffer
 
         // Check if this position is too close to any existing position
         val tooClose = occupiedPositions.exists { case (existingX, existingY) =>
@@ -154,6 +213,11 @@ class GameManager:
           placed = true
 
         attempts += 1
+
+      if attempts >= maxAttempts then
+        println(s"Failed to place unhealthy food after $maxAttempts attempts")
+
+    println(s"Generated ${healthyFoodGroup.size} healthy foods and ${unhealthyFoodGroup.size} unhealthy foods")
 
   // Getter methods for UI
   def getHealthyFoods: List[HealthyFood] = healthyFoodGroup.toList

@@ -1,56 +1,126 @@
 package nutriquest.view
 
 import javafx.fxml.FXML
-import javafx.scene.Group
 import javafx.scene.control.Label
+import javafx.scene.layout.Pane
 import nutriquest.MainApp
 import nutriquest.model.game.GameState
 import scalafx.Includes.*
 import scalafx.animation.AnimationTimer
+import scalafx.application.Platform
 import scalafx.scene.paint.Color
 import scalafx.scene.shape.Rectangle
 
 class GameController {
-  @FXML 
-  private var gameArea: Group = _
-  @FXML 
+  @FXML
+  private var gameArea: Pane = _
+  @FXML
   private var scoreLabel: Label = _
-  @FXML 
+  @FXML
   private var timeLabel: Label = _
-  @FXML 
+  @FXML
   private var pauseLabel: Label = _
 
   private var timer: AnimationTimer = _
   private var lastTimer = 0L
   private var firstFrame = true
+  private var gameInitialized = false
+
+  // Keep track of food counts to detect collection
+  private var lastHealthyFoodCount = 0
+  private var lastUnhealthyFoodCount = 0
 
   def initialize(): Unit = {
-    // This method is called automatically after FXML loading
+    println("GameController initialized")
     setupGame()
   }
 
   private def setupGame(): Unit = {
-    // Start the game
-    MainApp.gameManager.startGame()
+    // Add resize listeners
+    gameArea.widthProperty.addListener((_, _, newWidth) => {
+      val width = newWidth.doubleValue()
+      val height = gameArea.getHeight
+      if (width > 0 && height > 0 && gameInitialized) {
+        updateGameBounds(width, height)
+      }
+    })
 
-    // Add background
-    gameArea.children.add(Rectangle(1100, 700, Color.DarkGreen))
+    gameArea.heightProperty.addListener((_, _, newHeight) => {
+      val width = gameArea.getWidth
+      val height = newHeight.doubleValue()
+      if (width > 0 && height > 0 && gameInitialized) {
+        updateGameBounds(width, height)
+      }
+    })
 
-    // Add player
-    gameArea.children.add(MainApp.gameManager.player.imageView)
+    // Wait for proper layout
+    Platform.runLater(() => {
+      Platform.runLater(() => {
+        Platform.runLater(() => {
+          initializeGameWhenReady()
+        })
+      })
+    })
+  }
 
-    // Add initial food items
-    addFoodToScene()
+  private def initializeGameWhenReady(): Unit = {
+    val width = gameArea.getWidth
+    val height = gameArea.getHeight
 
-    // Start game loop
-    startGameLoop()
+    println(s"Attempting to initialize game with bounds: $width x $height")
+
+    if (width > 50 && height > 50 && !gameInitialized) {
+      gameInitialized = true
+
+      // Update bounds in GameManager first
+      MainApp.gameManager.updateGameBounds(width, height)
+
+      // Start the game
+      MainApp.gameManager.startGameWithBounds(width, height)
+
+      // Add player
+      gameArea.children.add(MainApp.gameManager.player.imageView)
+
+      // Add initial food items
+      addFoodToScene()
+
+      // Initialize food counts
+      lastHealthyFoodCount = MainApp.gameManager.getHealthyFoods.size
+      lastUnhealthyFoodCount = MainApp.gameManager.getUnhealthyFoods.size
+
+      // Start game loop
+      startGameLoop()
+
+      println("Game successfully initialized!")
+    } else if (!gameInitialized) {
+      println(s"Waiting for proper dimensions... Current: $width x $height")
+      Platform.runLater(() => initializeGameWhenReady())
+    }
+  }
+
+  private def updateGameBounds(width: Double, height: Double): Unit = {
+    if (width <= 0 || height <= 0) return
+
+    println(s"Updating game bounds to: $width x $height")
+    MainApp.gameManager.updateGameBounds(width, height)
+
+    // Refresh food positions for new bounds
+    refreshFoodOnScreen()
   }
 
   private def addFoodToScene(): Unit = {
     // Add healthy foods
-    MainApp.gameManager.getHealthyFoods.foreach(food => gameArea.children.add(food.imageView))
+    MainApp.gameManager.getHealthyFoods.foreach { food =>
+      if (!gameArea.children.contains(food.imageView)) {
+        gameArea.children.add(food.imageView)
+      }
+    }
     // Add unhealthy foods
-    MainApp.gameManager.getUnhealthyFoods.foreach(food => gameArea.children.add(food.imageView))
+    MainApp.gameManager.getUnhealthyFoods.foreach { food =>
+      if (!gameArea.children.contains(food.imageView)) {
+        gameArea.children.add(food.imageView)
+      }
+    }
   }
 
   private def startGameLoop(): Unit = {
@@ -63,17 +133,22 @@ class GameController {
         (t - lastTimer) / 1e9
 
       // Update game logic only if delta is valid
-      if delta > 0 then
+      if delta > 0 && delta < 0.1 then // Cap delta to prevent huge jumps
         MainApp.gameManager.update(delta)
 
       // Update HUD
       updateHUD()
 
-      // Check if map was regenerated (all healthy food collected)
-      if MainApp.gameManager.getHealthyFoods.size == MainApp.gameManager.healthyFoodGroup.size &&
-        MainApp.gameManager.getUnhealthyFoods.size == MainApp.gameManager.unhealthyFoodGroup.size then
-        // Map regenerated, need to refresh food on screen
+      // Check if food was collected by comparing counts
+      val currentHealthyCount = MainApp.gameManager.getHealthyFoods.size
+      val currentUnhealthyCount = MainApp.gameManager.getUnhealthyFoods.size
+
+      if (currentHealthyCount != lastHealthyFoodCount || currentUnhealthyCount != lastUnhealthyFoodCount) {
+        // Food was collected or map regenerated, refresh the screen
         refreshFoodOnScreen()
+        lastHealthyFoodCount = currentHealthyCount
+        lastUnhealthyFoodCount = currentUnhealthyCount
+      }
 
       // Handle game states
       MainApp.gameManager.gameState match
@@ -99,18 +174,18 @@ class GameController {
   }
 
   private def refreshFoodOnScreen(): Unit = {
-    // Remove all existing food from scene
+    // Remove all existing food from scene (keep player)
     val toRemove = gameArea.children.filter(node => {
-      node != MainApp.gameManager.player.imageView && !node.isInstanceOf[Rectangle]
+      node != MainApp.gameManager.player.imageView
     })
     gameArea.children.removeAll(toRemove.toSeq: _*)
 
-    // Add player back (in case it was removed)
+    // Add player back if somehow removed
     if (!gameArea.children.contains(MainApp.gameManager.player.imageView)) {
       gameArea.children.add(MainApp.gameManager.player.imageView)
     }
 
-    // Add new food items
+    // Add current food items
     addFoodToScene()
   }
 

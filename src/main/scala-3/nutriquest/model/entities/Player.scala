@@ -2,12 +2,16 @@ package nutriquest.model.entities
 
 import nutriquest.model.{Input, Movable}
 
-class Player extends GameEntity(550, 350, "/nutriquest/images/sid.jpg") with Movable:
+class Player extends GameEntity(50, 50, "/nutriquest/images/sid.jpg") with Movable:
   // Player stats
   var score: Int = 0
 
   // Movement (constant speed)
   var movingSpeed: Double = 8.0
+
+  // Player size
+  val width: Double = 50.0
+  val height: Double = 50.0
 
   // Add points to score
   def addScore(points: Int): Unit =
@@ -16,23 +20,34 @@ class Player extends GameEntity(550, 350, "/nutriquest/images/sid.jpg") with Mov
 object Player extends Movable:
   var movingSpeed: Double = 8.0
 
+  // Dynamic game bounds
+  private var gameWidth: Double = 800.0
+  private var gameHeight: Double = 600.0
+
   def apply(): Player = new Player()
 
+  def setGameBounds(width: Double, height: Double): Unit =
+    gameWidth = width
+    gameHeight = height
+    println(s"Player bounds set to: $width x $height") // Debug
+
   def move(player: Player): Unit =
+    val playerSize = 50.0 // Player's visual size
+
     if Input.wPressed || Input.upPressed then
       if player.posY > 0 then
-        player.posY = player.posY - player.movingSpeed
+        player.posY = math.max(0, player.posY - player.movingSpeed)
 
     if Input.aPressed || Input.leftPressed then
       if player.posX > 0 then
-        player.posX = player.posX - player.movingSpeed
+        player.posX = math.max(0, player.posX - player.movingSpeed)
         player.imageView.scaleX = -1 // Flip character to face left
 
     if Input.sPressed || Input.downPressed then
-      if player.posY < 700 then
-        player.posY = player.posY + player.movingSpeed
+      if player.posY < gameHeight - playerSize then
+        player.posY = math.min(gameHeight - playerSize, player.posY + player.movingSpeed)
 
     if Input.dPressed || Input.rightPressed then
-      if player.posX < 1100 then
-        player.posX = player.posX + player.movingSpeed
+      if player.posX < gameWidth - playerSize then
+        player.posX = math.min(gameWidth - playerSize, player.posX + player.movingSpeed)
         player.imageView.scaleX = 1 // Flip character back to face right

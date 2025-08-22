@@ -21,7 +21,7 @@ class MainMenuController:
       initOwner(MainApp.stage)
       setTitle("Quit NutriQuest")
       setHeaderText("Are you sure you want to quit?")
-      setContentText("Your progress will be lost.")
+      setContentText("The adventure awaits if you stay!")
 
     val result = alert.showAndWait()
     if result.isPresent && result.get() == ButtonType.OK then
