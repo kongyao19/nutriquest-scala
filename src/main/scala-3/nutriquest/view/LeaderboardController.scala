@@ -5,6 +5,7 @@ import javafx.fxml.{FXML, Initializable}
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.control.{Alert, ButtonType, TableColumn, TableView}
 import nutriquest.MainApp
+import nutriquest.util.Database
 
 import java.net.URL
 import java.util.ResourceBundle
@@ -47,14 +48,24 @@ class LeaderboardController extends Initializable:
     dateColumn.setPrefWidth(150)
 
   def loadLeaderboard(): Unit =
-    val entries = MainApp.leaderboardManager.getTopScores(10)
-    val tableData: ObservableList[Entry] = FXCollections.observableArrayList()
+    try {
+      val scores = Database.getTopScores(10)
+      val tableData: ObservableList[Entry] = FXCollections.observableArrayList()
 
-    entries.zipWithIndex.foreach { case (entry, index) =>
-      tableData.add(new Entry(index + 1, entry.playerName, entry.score, entry.getFormattedDate))
+      scores.zipWithIndex.foreach { case ((playerName, score, gameTime, playDate), index) =>
+        // Format the date string (remove timestamp details if needed)
+        val formattedDate = playDate.split(" ")(0) // Just get date part
+        tableData.add(new Entry(index + 1, playerName, score, formattedDate))
+      }
+
+      leaderboardTable.setItems(tableData)
+
+    } catch {
+      case e: Exception =>
+        println(s"Error loading leaderboard: ${e.getMessage}")
+        // Show empty table on error
+        leaderboardTable.setItems(FXCollections.observableArrayList())
     }
-
-    leaderboardTable.setItems(tableData)
 
   @FXML
   def handleBackToMenu(): Unit =
@@ -70,5 +81,15 @@ class LeaderboardController extends Initializable:
 
     val result = alert.showAndWait()
     if result.isPresent && result.get() == ButtonType.OK then
-      MainApp.leaderboardManager.clear()
-      loadLeaderboard()
+      try {
+        Database.clearLeaderboard()
+        loadLeaderboard() // Refresh the display
+      } catch {
+        case e: Exception =>
+          val errorAlert = new Alert(Alert.AlertType.ERROR)
+          errorAlert.initOwner(MainApp.stage)
+          errorAlert.setTitle("Error")
+          errorAlert.setHeaderText("Failed to clear leaderboard")
+          errorAlert.setContentText(s"Error: ${e.getMessage}")
+          errorAlert.showAndWait()
+      }

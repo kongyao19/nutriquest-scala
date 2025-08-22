@@ -5,28 +5,32 @@ import javafx.scene as jfxs
 import nutriquest.model.Input
 import nutriquest.model.game.GameManager
 import nutriquest.model.leaderboard.LBManager
-import scalafx.application.{JFXApp3, Platform}
+import nutriquest.util.Database
 import scalafx.Includes.*
-import scalafx.animation.AnimationTimer
 import scalafx.application.JFXApp3.PrimaryStage
-import scalafx.scene.control.{Alert, ButtonType}
+import scalafx.application.{JFXApp3, Platform}
+import scalafx.scene.Scene
 import scalafx.scene.control.Alert.AlertType
-import scalafx.scene.{Group, Scene}
+import scalafx.scene.control.{Alert, ButtonType}
 import scalafx.scene.input.{KeyCode, KeyEvent}
-import scalafx.scene.layout.AnchorPane
-import scalafx.scene.paint.Color
-import scalafx.scene.shape.Rectangle
+
 
 object MainApp extends JFXApp3:
   // Global managers
   var gameManager: GameManager = null
-  var leaderboardManager: LBManager = null
 
   var roots: scalafx.scene.layout.BorderPane = null
 
   override def start(): Unit =
+    // Initialize database
+    try {
+      Database.initializeDatabase()
+    } catch {
+      case e: Exception =>
+        println(s"Database initialization error: ${e.getMessage}")
+    }
+
     gameManager = GameManager()
-    leaderboardManager = LBManager()
 
     // Load root layout
     val rootResource = getClass.getResource("view/RootLayout.fxml")
