@@ -5,10 +5,12 @@ import javafx.scene as jfxs
 import nutriquest.model.Input
 import nutriquest.model.game.GameManager
 import nutriquest.model.leaderboard.LBManager
-import scalafx.application.JFXApp3
+import scalafx.application.{JFXApp3, Platform}
 import scalafx.Includes.*
 import scalafx.animation.AnimationTimer
 import scalafx.application.JFXApp3.PrimaryStage
+import scalafx.scene.control.{Alert, ButtonType}
+import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.{Group, Scene}
 import scalafx.scene.input.{KeyCode, KeyEvent}
 import scalafx.scene.layout.AnchorPane
@@ -46,8 +48,8 @@ object MainApp extends JFXApp3:
             case KeyCode.A => Input.aPressed = true
             case KeyCode.S => Input.sPressed = true
             case KeyCode.D => Input.dPressed = true
-            case KeyCode.Q => Input.qPressed = true
-            case KeyCode.Space => Input.spacePressed = !Input.spacePressed
+            case KeyCode.Q => if !Input.qPressed then Input.qPressed = true
+            case KeyCode.Space => if !Input.spacePressed then Input.spacePressed = true
             case _ =>
         }
 
@@ -58,6 +60,7 @@ object MainApp extends JFXApp3:
             case KeyCode.S => Input.sPressed = false
             case KeyCode.D => Input.dPressed = false
             case KeyCode.Q => Input.qPressed = false
+            case KeyCode.Space => Input.spacePressed = false
             case _ =>
         }
     showMainMenu()
@@ -106,6 +109,8 @@ object MainApp extends JFXApp3:
       // Game loop timer
       var lastTimer = 0L
       var firstFrame = true
+      var pauseText: scalafx.scene.text.Text = null
+
       val timer: AnimationTimer = AnimationTimer(t => {
         val delta = if firstFrame then
           firstFrame = false
@@ -121,27 +126,27 @@ object MainApp extends JFXApp3:
         // Handle game states
         gameManager.gameState match
           case nutriquest.model.game.GameState.Playing =>
-          // Update UI elements here if needed
+            // Remove pause text if it exists
+            if pauseText != null then
+              children.remove(pauseText)
+              pauseText = null
 
           case nutriquest.model.game.GameState.Paused =>
-            timer.stop()
-            // Add pause overlay
-            val pauseText = new scalafx.scene.text.Text("GAME PAUSED - Press SPACE to Resume"):
-              x = 400
-              y = 400
-              style = "-fx-font-size: 24px; -fx-fill: white;"
-            children.add(pauseText)
-
-            val pauseTimer: AnimationTimer = AnimationTimer(t => {
-              if gameManager.gameState != nutriquest.model.game.GameState.Paused then
-                children.remove(pauseText)
-                timer.start()
-            })
-            pauseTimer.start()
+            // Add pause text only if it doesn't exist
+            if pauseText == null then
+              pauseText = new scalafx.scene.text.Text("GAME PAUSED - Press SPACE to Resume"):
+                x = 400
+                y = 400
+                style = "-fx-font-size: 24px; -fx-fill: white;"
+              children.add(pauseText)
 
           case nutriquest.model.game.GameState.GameOver =>
             timer.stop()
             showGameOver()
+
+          case nutriquest.model.game.GameState.MainMenu =>
+            timer.stop()
+            showMainMenu()
 
           case _ =>
 
@@ -157,3 +162,23 @@ object MainApp extends JFXApp3:
     controller.setFinalScore(gameManager.getCurrentScore)
     val gameOverRoot = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.center = gameOverRoot
+
+  def showQuitConfirmation(): Unit =
+    // Pause the game first
+    if gameManager.gameState == nutriquest.model.game.GameState.Playing then
+      gameManager.pauseGame()
+
+    Platform.runLater(() => {
+      val alert = new Alert(AlertType.Confirmation):
+        title = "Quit Game"
+        headerText = "Are you sure you want to quit?"
+        contentText = "Your current progress will be lost."
+
+      val result = alert.showAndWait()
+      result match
+        case Some(ButtonType.OK) =>
+          gameManager.gameState = nutriquest.model.game.GameState.MainMenu
+        case _ =>
+          if gameManager.gameState == nutriquest.model.game.GameState.Paused then
+            gameManager.pauseGame()
+    })

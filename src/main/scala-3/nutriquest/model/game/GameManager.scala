@@ -1,5 +1,6 @@
 package nutriquest.model.game
 
+import nutriquest.MainApp
 import nutriquest.model.Input
 import nutriquest.model.entities.{HealthyFood, Player, UnhealthyFood}
 
@@ -60,14 +61,22 @@ class GameManager:
         // Check for pause
         if Input.spacePressed then
           pauseGame()
+          Input.spacePressed = false
+
+        // Check for quit to main menu
+        if Input.qPressed then
+          MainApp.showQuitConfirmation()
+          Input.qPressed = false
 
       case GameState.Paused =>
         if Input.spacePressed then
           pauseGame()
+          Input.spacePressed = false
 
       case GameState.GameOver =>
         if Input.qPressed then
-          gameState = GameState.MainMenu
+          MainApp.showQuitConfirmation()
+          Input.qPressed = false
 
       case _ => // Handle other states in the UI layer
 

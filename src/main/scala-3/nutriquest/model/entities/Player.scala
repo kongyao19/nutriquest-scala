@@ -17,22 +17,22 @@ object Player extends Movable:
   var movingSpeed: Double = 8.0
 
   def apply(): Player = new Player()
-  
+
   def move(player: Player): Unit =
     if Input.wPressed then
       if player.posY > 0 then
-        player.imageView.y = player.posY - player.movingSpeed
+        player.posY = player.posY - player.movingSpeed
 
     if Input.aPressed then
       if player.posX > 0 then
-        player.imageView.x = player.posX - player.movingSpeed
+        player.posX = player.posX - player.movingSpeed
         player.imageView.scaleX = -1 // Flip character to face left
 
     if Input.sPressed then
       if player.posY < 700 then
-        player.imageView.y = player.posY + player.movingSpeed
+        player.posY = player.posY + player.movingSpeed
 
     if Input.dPressed then
       if player.posX < 1100 then
-        player.imageView.x = player.posX + player.movingSpeed
+        player.posX = player.posX + player.movingSpeed
         player.imageView.scaleX = 1 // Flip character back to face right
