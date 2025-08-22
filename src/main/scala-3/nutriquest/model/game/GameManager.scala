@@ -154,22 +154,6 @@ class GameManager:
           placed = true
 
         attempts += 1
-//  private def generateNewMap(): Unit =
-//    // Clear existing food
-//    healthyFoodGroup.clear()
-//    unhealthyFoodGroup.clear()
-//
-//    // Generate healthy foods
-//    for _ <- 1 to healthyFoodPerMap do
-//      val x = Random.nextDouble() * (gameWidth - 100) + 50 // Leave margins
-//      val y = Random.nextDouble() * (gameHeight - 100) + 50
-//      healthyFoodGroup += HealthyFood.generateRandom(x, y)
-//
-//    // Generate unhealthy foods
-//    for _ <- 1 to unhealthyFoodPerMap do
-//      val x = Random.nextDouble() * (gameWidth - 100) + 50
-//      val y = Random.nextDouble() * (gameHeight - 100) + 50
-//      unhealthyFoodGroup += UnhealthyFood.generateRandom(x, y)
 
   // Getter methods for UI
   def getHealthyFoods: List[HealthyFood] = healthyFoodGroup.toList

@@ -7,3 +7,7 @@ object Input:
   var dPressed = false
   var spacePressed = false
   var qPressed = false
+  var upPressed = false
+  var downPressed = false
+  var leftPressed = false
+  var rightPressed = false

@@ -50,6 +50,10 @@ object MainApp extends JFXApp3:
             case KeyCode.D => Input.dPressed = true
             case KeyCode.Q => if !Input.qPressed then Input.qPressed = true
             case KeyCode.Space => if !Input.spacePressed then Input.spacePressed = true
+            case KeyCode.Up => Input.upPressed = true
+            case KeyCode.Down => Input.downPressed = true
+            case KeyCode.Left => Input.leftPressed = true
+            case KeyCode.Right => Input.rightPressed = true
             case _ =>
         }
 
@@ -61,6 +65,10 @@ object MainApp extends JFXApp3:
             case KeyCode.D => Input.dPressed = false
             case KeyCode.Q => Input.qPressed = false
             case KeyCode.Space => Input.spacePressed = false
+            case KeyCode.Up => Input.upPressed = false
+            case KeyCode.Down => Input.downPressed = false
+            case KeyCode.Left => Input.leftPressed = false
+            case KeyCode.Right => Input.rightPressed = false
             case _ =>
         }
     showMainMenu()
