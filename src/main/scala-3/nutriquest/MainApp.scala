@@ -92,7 +92,7 @@ object MainApp extends JFXApp3:
     val resource = getClass.getResource("view/Instructions.fxml")
     val loader = new FXMLLoader(resource)
     loader.load()
-    val instructionsRoot = loader.getRoot[jfxs.layout.AnchorPane]
+    val instructionsRoot = loader.getRoot[jfxs.layout.BorderPane]
     this.roots.center = instructionsRoot
 
   def showLeaderboard(): Unit =

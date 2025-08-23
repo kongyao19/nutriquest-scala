@@ -1,31 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutriquest.view.InstructionsController">
-    <children>
-        <Label layoutX="300.0" layoutY="30.0" text="How to Play" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="30.0">
-            <font>
-                <Font name="System Bold" size="32.0" />
-            </font>
-        </Label>
-        <ScrollPane layoutX="50.0" layoutY="80.0" prefHeight="450.0" prefWidth="700.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="80.0">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutriquest.view.InstructionsController">
+
+    <!-- TOP: Title -->
+    <top>
+        <VBox alignment="CENTER">
+            <Label text="How to Play">
+                <font>
+                    <Font name="System Bold" size="32.0" />
+                </font>
+            </Label>
+            <padding>
+                <Insets bottom="10.0" top="20.0" />
+            </padding>
+        </VBox>
+    </top>
+
+    <!-- CENTER: ScrollPane with content -->
+    <center>
+        <ScrollPane fitToWidth="true" maxHeight="600.0" maxWidth="1200.0">
             <content>
-                <VBox spacing="15.0">
+                <VBox fillWidth="true" spacing="15.0">
                     <children>
                         <Label text="Objective:">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
-                        <Label text="Navigate through the nutrition adventure world, collect healthy foods, and avoid junk food to maintain your health score. The goal is to achieve the highest score possible while learning about nutrition!" wrapText="true">
+                        <Label text="Move around the map and collect as many healthy foods as you can within 30 seconds. Each healthy food increases your score, while junk food decreases it. At the end, your score will be saved to the leaderboard." wrapText="true">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
+
                         <Label text="Controls:">
                             <font>
                                 <Font name="System Bold" size="18.0" />
@@ -34,11 +49,12 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </Label>
-                        <Label text="Use WASD keys or arrow keys to move your character around the game world. Press SPACE to interact with special items or power-ups." wrapText="true">
+                        <Label text="Use WASD keys or the Arrow Keys to move your character around the map." wrapText="true">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
+
                         <Label text="Food Types &amp; Points:">
                             <font>
                                 <Font name="System Bold" size="18.0" />
@@ -47,11 +63,12 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </Label>
-                        <Label text="• Fruits and Vegetables: +10 points each&#10;• Whole Grains: +8 points each&#10;• Lean Proteins: +12 points each&#10;• Dairy Products: +6 points each&#10;• Junk Food: -15 points each&#10;• Sugary Drinks: -20 points each" wrapText="true">
+                        <Label text="• Protein: +15 points&#10;• Vitamin: +12 points&#10;• Carbs: +10 points&#10;• Healthy Fats: +18 points&#10;• Junk Food: -10 points" wrapText="true">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
+
                         <Label text="Game Mechanics:">
                             <font>
                                 <Font name="System Bold" size="18.0" />
@@ -60,11 +77,12 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </Label>
-                        <Label text="Your health decreases over time, so you need to collect healthy foods to maintain it. If your health reaches zero, the game ends. Bonus multipliers appear randomly and can double your points for a limited time!" wrapText="true">
+                        <Label text="You have 30 seconds to collect as much food as possible. When the timer ends, your final score is recorded in the leaderboard. Collect healthy food for higher scores, and avoid junk food to prevent losing points!" wrapText="true">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
+
                         <Label text="Tips:">
                             <font>
                                 <Font name="System Bold" size="18.0" />
@@ -73,7 +91,7 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </Label>
-                        <Label text="• Prioritize fruits and vegetables for consistent health recovery&#10;• Avoid junk food areas when your health is low&#10;• Look for bonus multipliers to maximize your score&#10;• Learn the nutritional value of different foods as you play!" wrapText="true">
+                        <Label text="• Focus on high-value foods like Healthy Fats (+18) and Protein (+15)&#10;• Avoid Junk Food (-10) whenever possible&#10;• Keep moving quickly — you only have 30 seconds&#10;• Aim for the highest score to top the leaderboard!" wrapText="true">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -84,7 +102,20 @@
                     </padding>
                 </VBox>
             </content>
+            <BorderPane.margin>
+                <Insets left="60.0" right="60.0" />
+            </BorderPane.margin>
         </ScrollPane>
-        <Button layoutX="350.0" layoutY="550.0" mnemonicParsing="false" onAction="#handleBackToMenu" text="Back to Menu" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="350.0" />
-    </children>
-</AnchorPane>
+    </center>
+
+    <!-- BOTTOM: Button -->
+    <bottom>
+        <VBox alignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#handleBackToMenu" text="Back to Menu" />
+            <padding>
+                <Insets bottom="20.0" top="20.0" />
+            </padding>
+        </VBox>
+    </bottom>
+
+</BorderPane>
