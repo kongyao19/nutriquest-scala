@@ -87,12 +87,10 @@
     -fx-background-color: linear-gradient(to right, #00f2fe, #4facfe) !important;
     -fx-text-fill: black !important;
 }
-
 /* Also target the table cells specifically */
 .table-row-cell:selected .table-cell {
     -fx-text-fill: black !important;
 }
-
 /* Make sure text in selected cells is black */
 .table-row-cell:selected * {
     -fx-text-fill: black !important;
@@ -145,9 +143,8 @@
 
 /* ScrollPane track (background of scrollbar area) */
 .scroll-bar .track {
-    -fx-background-color: #223344; /* dark blue-gray matching your theme */
+    -fx-background-color: #223344;
 }
-
 /* ScrollPane thumb (the draggable bar) */
 .scroll-bar .thumb {
     -fx-background-color: #6CA0DC; /* soft light blue for visibility */

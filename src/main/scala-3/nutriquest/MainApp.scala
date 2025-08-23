@@ -38,17 +38,16 @@ object MainApp extends JFXApp3:
 
     // Initialize stage
     stage = new PrimaryStage:
-      title = "NutriQuest🍌 - Nutrition Adventure Game"
+      title = "NutriQuest - Nutrition Adventure Game"
       icons += new Image(getClass.getResource("/nutriquest/images/sidd.gif").toExternalForm)
       resizable = true
-      minWidth = 510 //800
-      minHeight = 630//600
-      width = 510 //1200
-      height = 630 //800
+      minWidth = 510
+      minHeight = 630
+      width = 510
+      height = 630
       scene = new Scene:
         root = roots
         stylesheets += getClass.getResource("/nutriquest/Style.css").toExternalForm
-//        fill = Color.Black
 
         // Set up key event handling
         onKeyPressed = (e: KeyEvent) => {

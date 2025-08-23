@@ -9,8 +9,6 @@ import nutriquest.model.game.GameState
 import scalafx.Includes.*
 import scalafx.animation.AnimationTimer
 import scalafx.application.Platform
-import scalafx.scene.paint.Color
-import scalafx.scene.shape.Rectangle
 
 class GameController {
   @FXML
