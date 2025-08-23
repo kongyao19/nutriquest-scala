@@ -2,8 +2,7 @@ package nutriquest
 
 import javafx.fxml.FXMLLoader
 import javafx.scene as jfxs
-import nutriquest.model.Input
-import nutriquest.model.game.GameManager
+import nutriquest.model.game.{GameManager, Input}
 import nutriquest.util.Database
 import scalafx.Includes.*
 import scalafx.application.JFXApp3

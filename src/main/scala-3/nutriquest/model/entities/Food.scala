@@ -1,7 +1,6 @@
 package nutriquest.model.entities
 
-import nutriquest.model.NutritionTypes
-
+import nutriquest.model.game.NutritionTypes
 import scala.util.Random
 
 // General Food class

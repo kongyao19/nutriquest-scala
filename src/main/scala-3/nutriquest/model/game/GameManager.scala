@@ -1,7 +1,6 @@
 package nutriquest.model.game
 
 import nutriquest.MainApp
-import nutriquest.model.Input
 import nutriquest.model.entities.{HealthyFood, Player, UnhealthyFood}
 import scalafx.application.Platform
 import scalafx.scene.control.{Alert, ButtonType}

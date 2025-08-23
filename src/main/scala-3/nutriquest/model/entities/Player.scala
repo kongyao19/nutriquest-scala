@@ -1,6 +1,6 @@
 package nutriquest.model.entities
 
-import nutriquest.model.{Input, Movable}
+import nutriquest.model.game.{Input, Movable}
 
 class Player extends GameEntity(750, 300, "/nutriquest/images/sid.png") with Movable:
   // Player stats

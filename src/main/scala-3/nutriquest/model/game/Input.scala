@@ -1,4 +1,4 @@
-package nutriquest.model
+package nutriquest.model.game
 
 object Input:
   var wPressed = false
