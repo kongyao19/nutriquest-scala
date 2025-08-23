@@ -49,7 +49,7 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </Label>
-                        <Label styleClass="instruction-text" text="Use WASD keys or the Arrow Keys to move your character around the map." wrapText="true">
+                        <Label styleClass="instruction-text" text="Use WASD keys or the Arrow Keys to move your character around the map. Press Space to pause the game, and Esc to quit." wrapText="true">
                             <font>
                                 <Font size="14.0" />
                             </font>

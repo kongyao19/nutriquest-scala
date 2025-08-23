@@ -2,7 +2,7 @@ package nutriquest.model.entities
 
 import nutriquest.model.{Input, Movable}
 
-class Player extends GameEntity(50, 50, "/nutriquest/images/sid.png") with Movable:
+class Player extends GameEntity(750, 300, "/nutriquest/images/sid.png") with Movable:
   // Player stats
   var score: Int = 0
   imageView.fitHeight = 100
@@ -34,7 +34,7 @@ object Player extends Movable:
     println(s"Player bounds set to: $width x $height") // Debug
 
   def move(player: Player): Unit =
-    val playerSize = 50.0 // Player's visual size
+    val playerSize = 100.0 // Player's visual size
 
     if Input.wPressed || Input.upPressed then
       if player.posY > 0 then

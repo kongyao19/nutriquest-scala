@@ -14,7 +14,7 @@
     <top>
         <VBox alignment="CENTER" spacing="20.0">
             <children>
-                <Label styleClass="title" text="Game Over!">
+                <Label styleClass="title" text="Game Over !">
                     <font>
                         <Font name="System Bold" size="42.0" />
                     </font>

@@ -1,49 +1,167 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutriquest.view.GameController">
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutriquest.view.GameController">
     <children>
         <!-- Game Area (where all game objects will be added programmatically) -->
-        <Pane fx:id="gameArea" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" style="-fx-background-color: darkgreen;" />
+        <Pane fx:id="gameArea" style="-fx-background-color: darkgreen;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
 
         <!-- HUD at the top -->
-        <HBox AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" spacing="30.0" style="-fx-background-color: rgba(0,0,0,0.7); -fx-padding: 15;">
+        <HBox spacing="40.0" style="-fx-background-color: rgba(54, 69, 79, 0.85); -fx-padding: 15; -fx-alignment: center-left;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
             <children>
+                <!-- Score -->
                 <Label text="Score:" textFill="WHITE">
                     <font>
-                        <Font name="Arial Bold" size="18.0" />
+                        <Font name="Arial" size="18.0" />
                     </font>
+                    <style>-fx-font-weight: bold;</style>
                 </Label>
                 <Label fx:id="scoreLabel" text="0" textFill="YELLOW">
                     <font>
-                        <Font name="Arial Bold" size="18.0" />
+                        <Font name="Arial" size="18.0" />
                     </font>
+                    <style>-fx-font-weight: bold;</style>
                 </Label>
+
+                <!-- Time -->
                 <Label text="Time:" textFill="WHITE">
                     <font>
-                        <Font name="Arial Bold" size="18.0" />
+                        <Font name="Arial" size="18.0" />
                     </font>
+                    <style>-fx-font-weight: bold;</style>
                 </Label>
-                <Label fx:id="timeLabel" text="02:00" textFill="LIGHTGREEN">
+                <Label fx:id="timeLabel" text="00:00" textFill="LIGHTGREEN">
                     <font>
-                        <Font name="Arial Bold" size="18.0" />
+                        <Font name="Arial" size="18.0" />
                     </font>
+                    <style>-fx-font-weight: bold;</style>
                 </Label>
+
+                <Region HBox.hgrow="ALWAYS" />
+                
+                <!-- Protein Category -->
+                <HBox spacing="8.0" style="-fx-alignment: center-left;">
+                    <children>
+                        <Label text="Protein:" textFill="WHITE">
+                            <font>
+                                <Font name="Arial" size="16.0" />
+                            </font>
+                            <style>-fx-font-weight: bold;</style>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                        </Label>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-scale-x: 2.5; -fx-scale-y: 2.5;">
+                            <image>
+                                <Image url="@../images/protein.png" />
+                            </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                        </ImageView>
+                    </children>
+                </HBox>
+
+                <!-- Vitamin Category -->
+                <HBox spacing="8.0" style="-fx-alignment: center-left;">
+                    <children>
+                        <Label text="Vitamin:" textFill="WHITE">
+                            <font>
+                                <Font name="Arial" size="16.0" />
+                            </font>
+                            <style>-fx-font-weight: bold;</style>
+                     <padding>
+                        <Insets right="7.0" />
+                     </padding>
+                        </Label>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-scale-x: 1.5; -fx-scale-y: 1.5;">
+                            <image>
+                                <Image url="@../images/vitamin.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+
+                <!-- Carbs Category -->
+                <HBox spacing="8.0" style="-fx-alignment: center-left;">
+                    <children>
+                        <Label text="Carbs:" textFill="WHITE">
+                            <font>
+                                <Font name="Arial" size="16.0" />
+                            </font>
+                            <style>-fx-font-weight: bold;</style>
+                     <padding>
+                        <Insets right="7.0" />
+                     </padding>
+                        </Label>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-scale-x: 1.5; -fx-scale-y: 1.5;">
+                            <image>
+                                <Image url="@../images/carbs.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+
+                <!-- Fats Category -->
+                <HBox spacing="8.0" style="-fx-alignment: center-left;">
+                    <children>
+                        <Label text="Fats:" textFill="WHITE">
+                            <font>
+                                <Font name="Arial" size="16.0" />
+                            </font>
+                            <style>-fx-font-weight: bold;</style>
+                     <padding>
+                        <Insets right="7.0" />
+                     </padding>
+                        </Label>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-scale-x: 1.5; -fx-scale-y: 1.5;">
+                            <image>
+                                <Image url="@../images/fats.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+
+                <!-- Junk Category -->
+                <HBox spacing="8.0" style="-fx-alignment: center-left;">
+                    <children>
+                        <Label text="Junk:" textFill="WHITE">
+                            <font>
+                                <Font name="Arial" size="16.0" />
+                            </font>
+                            <style>-fx-font-weight: bold;</style>
+                     <padding>
+                        <Insets right="7.0" />
+                     </padding>
+                        </Label>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" style="-fx-scale-x: 1.5; -fx-scale-y: 1.5;">
+                            <image>
+                                <Image url="@../images/junk.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+               <HBox.margin>
+                  <Insets right="50.0" />
+               </HBox.margin>
+                </HBox>
             </children>
         </HBox>
 
         <!-- Pause Text (centered and responsive) -->
-        <StackPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                   AnchorPane.topAnchor="60.0" AnchorPane.bottomAnchor="0.0"
-                   mouseTransparent="true">
-            <Label fx:id="pauseLabel" text="GAME PAUSED - Press SPACE to Resume"
-                   textFill="WHITE" visible="false"
-                   style="-fx-background-color: rgba(0,0,0,0.8); -fx-padding: 20;">
+        <StackPane mouseTransparent="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+            <Label fx:id="pauseLabel" style="-fx-background-color: rgba(0,0,0,0.8); -fx-padding: 20; -fx-font-weight: bold" text="GAME PAUSED - Press SPACE to Resume" textFill="WHITE" visible="false">
                 <font>
-                    <Font name="Arial Bold" size="24.0" />
+                    <Font name="Arial" size="24.0" />
                 </font>
             </Label>
         </StackPane>

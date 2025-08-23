@@ -83,8 +83,7 @@
     -fx-text-fill: black;
 }
 /* Selected row - more specific selectors */
-.table-view:focused .table-row-cell:selected,
-.table-row-cell:selected {
+.table-view:focused .table-row-cell:selected {
     -fx-background-color: linear-gradient(to right, #00f2fe, #4facfe) !important;
     -fx-text-fill: black !important;
 }
@@ -119,14 +118,18 @@
 }
 
 /* Menu items (dropdown entries) */
-.menu-item {
+.menu-item, .context-menu {
     -fx-background-color: #2c2c40;
     -fx-text-fill: #f5f5f5;
 }
 
 .menu-item:hover {
     -fx-background-color: linear-gradient(to right, #4facfe, #00f2fe);
-    -fx-text-fill: black;
+    -fx-text-fill: black !important;
+}
+
+.menu-item:hover .label{
+    -fx-text-fill: black !important;
 }
 
 .footer {
@@ -200,10 +203,11 @@
     -fx-padding: 24 20 20 20;
 }
 
-.dialog-pane .content .label {
+.dialog-pane .content * {
     -fx-text-fill: #f0f0f0;
     -fx-font-size: 14px;
     -fx-wrap-text: true;
+    -fx-font-weight: bold;
 }
 
 /* Button Bar - Better Spacing */
@@ -224,4 +228,11 @@
     /* subtle glow */
     -fx-effect: dropshadow(gaussian, rgba(100,150,200,0.3), 4, 0.3, 0, 1);
     -fx-letter-spacing: 0.5px;
+}
+
+#gameArea {
+    -fx-background-image: url('/nutriquest/images/gameBG.png');
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
 }

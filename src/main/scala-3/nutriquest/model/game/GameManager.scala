@@ -38,7 +38,7 @@ class GameManager:
     Player.setGameBounds(width, height)
 
     // Ensure player stays within new bounds
-    val playerSize = 50.0
+    val playerSize = 100.0
     player.posX = math.min(player.posX, width - playerSize)
     player.posY = math.min(player.posY, height - playerSize)
     player.posX = math.max(player.posX, 0)
@@ -109,9 +109,9 @@ class GameManager:
           Input.spacePressed = false
 
         // Check for quit to main menu
-        if Input.qPressed then
+        if Input.escPressed then
           showQuitConfirmation()
-          Input.qPressed = false
+          Input.escPressed = false
 
       case GameState.Paused =>
         if Input.spacePressed then
@@ -152,7 +152,7 @@ class GameManager:
     val minDistance = 80.0
     val maxAttempts = 100
     val edgeBuffer = 50.0 // Keep food away from edges
-    val playerSize = 50.0
+    val playerSize = 100.0
 
     // Keep track of all occupied positions
     val occupiedPositions = scala.collection.mutable.ListBuffer[(Double, Double)]()
