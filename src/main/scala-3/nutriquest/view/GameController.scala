@@ -4,6 +4,7 @@ import javafx.fxml.FXML
 import javafx.scene.control.Label
 import javafx.scene.layout.Pane
 import nutriquest.MainApp
+import nutriquest.MainApp.stage
 import nutriquest.model.game.GameState
 import scalafx.Includes.*
 import scalafx.animation.AnimationTimer
@@ -165,6 +166,10 @@ class GameController {
         case GameState.MainMenu =>
           timer.stop()
           MainApp.showMainMenu()
+          stage.setMaximized(false)
+          stage.setWidth(510)
+          stage.setHeight(630)
+          stage.centerOnScreen()
 
         case _ =>
 

@@ -111,6 +111,7 @@ object MainApp extends JFXApp3:
     val controller = loader.getController[nutriquest.view.GameController]()
     val gameRoot = loader.getRoot[jfxs.layout.AnchorPane]
     this.roots.center = gameRoot
+    stage.setMaximized(true)
 
   def showGameOver(): Unit =
     val resource = getClass.getResource("view/GameOver.fxml")
@@ -118,5 +119,9 @@ object MainApp extends JFXApp3:
     loader.load()
     val controller = loader.getController[nutriquest.view.GameOverController]()
     controller.setFinalScore(gameManager.getCurrentScore)
-    val gameOverRoot = loader.getRoot[jfxs.layout.AnchorPane]
+    val gameOverRoot = loader.getRoot[jfxs.layout.BorderPane]
     this.roots.center = gameOverRoot
+    stage.setMaximized(false)
+    stage.setWidth(510)
+    stage.setHeight(630)
+    stage.centerOnScreen()

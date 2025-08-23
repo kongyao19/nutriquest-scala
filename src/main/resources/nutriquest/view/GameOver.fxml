@@ -1,23 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutriquest.view.GameOverController">
-    <children>
-        <Label layoutX="280.0" layoutY="80.0" styleClass="title" text="Game Over!" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="80.0">
-            <font>
-                <Font name="System Bold" size="42.0" />
-            </font>
-        </Label>
-        <Label fx:id="finalScoreLabel" layoutX="300.0" layoutY="150.0" styleClass="subtitle" text="Final Score: 0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="150.0">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Label>
-        <VBox alignment="CENTER" layoutX="250.0" layoutY="220.0" spacing="15.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="220.0">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutriquest.view.GameOverController">
+
+    <!-- TOP: Title and Score -->
+    <top>
+        <VBox alignment="CENTER" spacing="20.0">
+            <children>
+                <Label styleClass="title" text="Game Over!">
+                    <font>
+                        <Font name="System Bold" size="42.0" />
+                    </font>
+                </Label>
+                <Label fx:id="finalScoreLabel" styleClass="subtitle" text="Final Score: 0">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+            </children>
+            <padding>
+                <Insets bottom="20.0" top="40.0" />
+            </padding>
+         <BorderPane.margin>
+            <Insets top="50.0" />
+         </BorderPane.margin>
+        </VBox>
+    </top>
+
+    <!-- CENTER: Name Input -->
+    <center>
+        <VBox alignment="CENTER" maxHeight="130.0" maxWidth="400.0" spacing="15.0">
             <children>
                 <Label text="Enter your name for the leaderboard:">
                     <font>
@@ -27,13 +46,38 @@
                 <TextField fx:id="playerNameField" maxWidth="300.0" promptText="Your Name" />
             </children>
         </VBox>
-        <VBox alignment="CENTER" layoutX="300.0" layoutY="350.0" spacing="15.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="350.0">
+    </center>
+
+    <!-- BOTTOM: Buttons and Message -->
+    <bottom>
+        <VBox alignment="CENTER" minHeight="250.0" spacing="20.0">
             <children>
-                <Button mnemonicParsing="false" onAction="#handleSaveScore" prefWidth="200.0" text="Save Score" />
-                <Button mnemonicParsing="false" onAction="#handlePlayAgain" prefWidth="200.0" text="Play Again" />
-                <Button mnemonicParsing="false" onAction="#handleBackToMenu" prefWidth="200.0" text="Back to Menu" />
+                <!-- Buttons -->
+                <VBox alignment="CENTER" spacing="15.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#handleSaveScore" prefWidth="200.0" text="Save Score" />
+                        <Button mnemonicParsing="false" onAction="#handlePlayAgain" prefWidth="200.0" text="Play Again" />
+                        <Button mnemonicParsing="false" onAction="#handleBackToMenu" prefWidth="200.0" text="Back to Menu" />
+                    </children>
+                </VBox>
+
+                <!-- Encouragement Message -->
+                <Label styleClass="subtitle" text="Great job! Challenge yourself to beat this score!" textAlignment="CENTER" wrapText="true">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+                </Label>
             </children>
+            <padding>
+                <Insets bottom="50.0" top="20.0" />
+            </padding>
+         <BorderPane.margin>
+            <Insets bottom="30.0" />
+         </BorderPane.margin>
         </VBox>
-        <Label layoutX="220.0" layoutY="500.0" styleClass="subtitle" text="Great job! Challenge yourself to beat this score!" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="220.0" />
-    </children>
-</AnchorPane>
+    </bottom>
+
+</BorderPane>

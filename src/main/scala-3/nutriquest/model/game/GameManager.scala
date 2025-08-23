@@ -1,5 +1,6 @@
 package nutriquest.model.game
 
+import nutriquest.MainApp
 import nutriquest.model.Input
 import nutriquest.model.entities.{HealthyFood, Player, UnhealthyFood}
 import scalafx.application.Platform
@@ -69,6 +70,7 @@ class GameManager:
 
     Platform.runLater(() => {
       val alert = new Alert(AlertType.Confirmation):
+        initOwner(MainApp.stage)
         title = "Quit Game"
         headerText = "Are you sure you want to quit?"
         contentText = "Your current progress will be lost."
