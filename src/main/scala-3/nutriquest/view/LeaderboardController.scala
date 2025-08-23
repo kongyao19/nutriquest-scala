@@ -42,11 +42,6 @@ class LeaderboardController extends Initializable:
     scoreColumn.setCellValueFactory(new PropertyValueFactory[Entry, Integer]("score"))
     dateColumn.setCellValueFactory(new PropertyValueFactory[Entry, String]("date"))
 
-    rankColumn.setPrefWidth(80)
-    nameColumn.setPrefWidth(200)
-    scoreColumn.setPrefWidth(100)
-    dateColumn.setPrefWidth(150)
-
   def loadLeaderboard(): Unit =
     try {
       val scores = Database.getTopScores(10)

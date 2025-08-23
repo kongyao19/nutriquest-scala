@@ -1,30 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutriquest.view.MainMenuController">
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutriquest.view.MainMenuController">
     <children>
-        <Label layoutX="250.0" layoutY="80.0" styleClass="title-label" text="NutriQuest" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="80.0">
+        <!-- Title Label - anchored to top and horizontally centered -->
+        <Label styleClass="title" text="NutriQuest"
+               AnchorPane.topAnchor="60.0"
+               AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="0.0"
+               alignment="CENTER">
             <font>
                 <Font name="System Bold" size="48.0" />
             </font>
         </Label>
-        <Label layoutX="275.0" layoutY="140.0" styleClass="subtitle-label" text="Nutrition Adventure Game" AnchorPane.leftAnchor="275.0" AnchorPane.topAnchor="140.0">
+
+        <!-- Subtitle Label - positioned below title and horizontally centered -->
+        <Label styleClass="subtitle" text="Nutrition Adventure Game"
+               AnchorPane.topAnchor="140.0"
+               AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="0.0"
+               alignment="CENTER">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <VBox alignment="CENTER" layoutX="300.0" layoutY="220.0" spacing="20.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="220.0">
+
+        <!-- Menu Buttons VBox - centered both horizontally and vertically with margins -->
+        <VBox alignment="CENTER" spacing="20.0"
+              AnchorPane.topAnchor="220.0"
+              AnchorPane.bottomAnchor="80.0"
+              AnchorPane.leftAnchor="50.0"
+              AnchorPane.rightAnchor="50.0">
             <children>
-                <Button mnemonicParsing="false" onAction="#handleStartGame" prefWidth="200.0" text="Start Game" />
-                <Button mnemonicParsing="false" onAction="#handleInstructions" prefWidth="200.0" text="How to Play" />
-                <Button mnemonicParsing="false" onAction="#handleLeaderboard" prefWidth="200.0" text="Leaderboard" />
-                <Button mnemonicParsing="false" onAction="#handleQuit" prefWidth="200.0" styleClass="menu-button-danger" text="Quit Game" />
+                <Button mnemonicParsing="false" onAction="#handleStartGame"
+                        prefWidth="200.0" maxWidth="300.0" text="Start Game" />
+                <Button mnemonicParsing="false" onAction="#handleInstructions"
+                        prefWidth="200.0" maxWidth="300.0" text="How to Play" />
+                <Button mnemonicParsing="false" onAction="#handleLeaderboard"
+                        prefWidth="200.0" maxWidth="300.0" text="Leaderboard" />
+                <Button mnemonicParsing="false" onAction="#handleQuit"
+                        prefWidth="200.0" maxWidth="300.0" styleClass="menu-button-danger" text="Quit Game" />
             </children>
         </VBox>
-        <Label layoutX="20.0" layoutY="560.0" text="Version 1.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
+
+        <!-- Footer Label - anchored to bottom left -->
+        <Label styleClass="footer" text="Version 1.0"
+               AnchorPane.bottomAnchor="8.0"
+               AnchorPane.leftAnchor="10.0" />
     </children>
 </AnchorPane>
