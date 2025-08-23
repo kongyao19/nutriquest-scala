@@ -2,7 +2,7 @@ package nutriquest.model.entities
 
 import nutriquest.model.{Input, Movable}
 
-class Player extends GameEntity(50, 50, "/nutriquest/images/sidBig.png") with Movable:
+class Player extends GameEntity(50, 50, "/nutriquest/images/sid.png") with Movable:
   // Player stats
   var score: Int = 0
   imageView.fitHeight = 100

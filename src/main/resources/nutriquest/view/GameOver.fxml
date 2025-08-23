@@ -55,7 +55,7 @@
                 <!-- Buttons -->
                 <VBox alignment="CENTER" spacing="15.0">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#handleSaveScore" prefWidth="200.0" text="Save Score" />
+                        <Button defaultButton="true" mnemonicParsing="false" onAction="#handleSaveScore" prefWidth="200.0" text="Save Score" />
                         <Button mnemonicParsing="false" onAction="#handlePlayAgain" prefWidth="200.0" text="Play Again" />
                         <Button mnemonicParsing="false" onAction="#handleBackToMenu" prefWidth="200.0" text="Back to Menu" />
                     </children>

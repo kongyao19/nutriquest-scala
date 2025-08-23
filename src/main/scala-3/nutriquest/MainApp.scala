@@ -39,7 +39,7 @@ object MainApp extends JFXApp3:
     // Initialize stage
     stage = new PrimaryStage:
       title = "NutriQuest🍌 - Nutrition Adventure Game"
-      icons += new Image(getClass.getResource("/nutriquest/images/sid.png").toExternalForm)
+      icons += new Image(getClass.getResource("/nutriquest/images/sidd.gif").toExternalForm)
       resizable = true
       minWidth = 510 //800
       minHeight = 630//600
