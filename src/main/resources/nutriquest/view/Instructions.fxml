@@ -13,7 +13,7 @@
     <!-- TOP: Title -->
     <top>
         <VBox alignment="CENTER">
-            <Label text="How to Play">
+            <Label styleClass="title" text="How to Play">
                 <font>
                     <Font name="System Bold" size="32.0" />
                 </font>
