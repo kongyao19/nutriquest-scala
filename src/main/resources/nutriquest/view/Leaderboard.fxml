@@ -21,14 +21,14 @@
                 </font>
             </Label>
             <padding>
-                <Insets bottom="10.0" top="20.0" />
+                <Insets bottom="10.0" top="70.0" />
             </padding>
         </VBox>
     </top>
 
-    <!-- CENTER: TableView (will auto-resize) -->
+    <!-- CENTER: TableView (dynamic size based on data) -->
     <center>
-        <TableView fx:id="leaderboardTable" prefHeight="400.0" prefWidth="470.0">
+        <TableView fx:id="leaderboardTable" fixedCellSize="30.0" maxWidth="900.0" prefHeight="400.0" prefWidth="470.0" tableMenuButtonVisible="false">
             <columns>
                 <TableColumn fx:id="rankColumn" minWidth="20.0" prefWidth="30.0" text="Rank" />
                 <TableColumn fx:id="nameColumn" minWidth="50.0" text="Player Name" />
@@ -54,7 +54,7 @@
                 </children>
             </HBox>
             <padding>
-                <Insets bottom="20.0" top="20.0" />
+                <Insets bottom="50.0" top="20.0" />
             </padding>
         </VBox>
     </bottom>

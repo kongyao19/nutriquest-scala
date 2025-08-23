@@ -9,48 +9,30 @@
 <AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutriquest.view.MainMenuController">
     <children>
         <!-- Title Label - anchored to top and horizontally centered -->
-        <Label styleClass="title" text="NutriQuest"
-               AnchorPane.topAnchor="60.0"
-               AnchorPane.leftAnchor="0.0"
-               AnchorPane.rightAnchor="0.0"
-               alignment="CENTER">
+        <Label alignment="CENTER" styleClass="title" text="NutriQuest" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
             <font>
                 <Font name="System Bold" size="48.0" />
             </font>
         </Label>
 
         <!-- Subtitle Label - positioned below title and horizontally centered -->
-        <Label styleClass="subtitle" text="Nutrition Adventure Game"
-               AnchorPane.topAnchor="140.0"
-               AnchorPane.leftAnchor="0.0"
-               AnchorPane.rightAnchor="0.0"
-               alignment="CENTER">
+        <Label alignment="CENTER" styleClass="subtitle" text="Nutrition Adventure Game" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
 
         <!-- Menu Buttons VBox - centered both horizontally and vertically with margins -->
-        <VBox alignment="CENTER" spacing="20.0"
-              AnchorPane.topAnchor="220.0"
-              AnchorPane.bottomAnchor="80.0"
-              AnchorPane.leftAnchor="50.0"
-              AnchorPane.rightAnchor="50.0">
+        <VBox alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="220.0">
             <children>
-                <Button mnemonicParsing="false" onAction="#handleStartGame"
-                        prefWidth="200.0" maxWidth="300.0" text="Start Game" />
-                <Button mnemonicParsing="false" onAction="#handleInstructions"
-                        prefWidth="200.0" maxWidth="300.0" text="How to Play" />
-                <Button mnemonicParsing="false" onAction="#handleLeaderboard"
-                        prefWidth="200.0" maxWidth="300.0" text="Leaderboard" />
-                <Button mnemonicParsing="false" onAction="#handleQuit"
-                        prefWidth="200.0" maxWidth="300.0" styleClass="menu-button-danger" text="Quit Game" />
+                <Button maxWidth="300.0" mnemonicParsing="false" onAction="#handleStartGame" prefWidth="200.0" text="Start Game" />
+                <Button maxWidth="300.0" mnemonicParsing="false" onAction="#handleInstructions" prefWidth="200.0" text="How to Play" />
+                <Button maxWidth="300.0" mnemonicParsing="false" onAction="#handleLeaderboard" prefWidth="200.0" text="Leaderboard" />
+                <Button maxWidth="300.0" mnemonicParsing="false" onAction="#handleQuit" prefWidth="200.0" styleClass="menu-button-danger" text="Quit Game" />
             </children>
         </VBox>
 
         <!-- Footer Label - anchored to bottom left -->
-        <Label styleClass="footer" text="Version 1.0"
-               AnchorPane.bottomAnchor="8.0"
-               AnchorPane.leftAnchor="10.0" />
+        <Label styleClass="footer" text="Version 1.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="10.0" />
     </children>
 </AnchorPane>

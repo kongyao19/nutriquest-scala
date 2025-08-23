@@ -2,16 +2,18 @@ package nutriquest.model.entities
 
 import nutriquest.model.{Input, Movable}
 
-class Player extends GameEntity(50, 50, "/nutriquest/images/sid.jpg") with Movable:
+class Player extends GameEntity(50, 50, "/nutriquest/images/sidBig.png") with Movable:
   // Player stats
   var score: Int = 0
+  imageView.fitHeight = 100
+  imageView.fitWidth = 100
 
   // Movement (constant speed)
   var movingSpeed: Double = 8.0
 
   // Player size
-  val width: Double = 50.0
-  val height: Double = 50.0
+  val width: Double = 100.0
+  val height: Double = 100.0
 
   // Add points to score
   def addScore(points: Int): Unit =
@@ -41,7 +43,7 @@ object Player extends Movable:
     if Input.aPressed || Input.leftPressed then
       if player.posX > 0 then
         player.posX = math.max(0, player.posX - player.movingSpeed)
-        player.imageView.scaleX = -1 // Flip character to face left
+        player.imageView.scaleX = 1 // Flip character to face left
 
     if Input.sPressed || Input.downPressed then
       if player.posY < gameHeight - playerSize then
@@ -50,4 +52,4 @@ object Player extends Movable:
     if Input.dPressed || Input.rightPressed then
       if player.posX < gameWidth - playerSize then
         player.posX = math.min(gameWidth - playerSize, player.posX + player.movingSpeed)
-        player.imageView.scaleX = 1 // Flip character back to face right
+        player.imageView.scaleX = -1 // Flip character back to face right

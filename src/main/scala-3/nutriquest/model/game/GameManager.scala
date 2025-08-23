@@ -121,7 +121,7 @@ class GameManager:
       case _ => // Handle other states in the UI layer
 
   private def checkCollisions(): Unit =
-    val collisionDistance = 40.0
+    val collisionDistance = 50.0
 
     // Check healthy food collisions
     healthyFoodGroup.filterInPlace: food =>

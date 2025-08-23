@@ -42,6 +42,11 @@ class LeaderboardController extends Initializable:
     scoreColumn.setCellValueFactory(new PropertyValueFactory[Entry, Integer]("score"))
     dateColumn.setCellValueFactory(new PropertyValueFactory[Entry, String]("date"))
 
+    // Customize the empty table message
+    val placeholderLabel = new javafx.scene.control.Label("🏆 No champions yet! 🏆\nBe the first to claim victory!")
+    placeholderLabel.setStyle("-fx-text-alignment: center; -fx-font-size: 14px; -fx-text-fill: gray;")
+    leaderboardTable.setPlaceholder(placeholderLabel)
+
   def loadLeaderboard(): Unit =
     try {
       val scores = Database.getTopScores(10)
@@ -55,12 +60,45 @@ class LeaderboardController extends Initializable:
 
       leaderboardTable.setItems(tableData)
 
+      // Resize table to fit the actual data
+      resizeTableToFitData(tableData.size())
+
     } catch {
       case e: Exception =>
         println(s"Error loading leaderboard: ${e.getMessage}")
         // Show empty table on error
         leaderboardTable.setItems(FXCollections.observableArrayList())
+        resizeTableToFitData(0)
     }
+
+  private def resizeTableToFitData(itemCount: Int): Unit =
+    if itemCount > 0 then
+      // Calculate height needed: header + (number of rows * row height) + padding
+      val headerHeight = 28.0
+      val rowHeight = 30.0 // This matches fixedCellSize in FXML
+      val padding = 2.0
+
+      val neededHeight = headerHeight + (itemCount * rowHeight) + padding
+
+      // Set a reasonable max height to prevent it from getting too tall
+      val maxHeight = 350.0
+      val minHeight = 120.0 // Minimum height to show at least header + 2 rows
+
+      val finalHeight = math.max(minHeight, math.min(neededHeight, maxHeight))
+
+      // Apply the calculated height
+      leaderboardTable.setPrefHeight(finalHeight)
+      leaderboardTable.setMaxHeight(finalHeight)
+      leaderboardTable.setMinHeight(finalHeight)
+
+      println(s"Resized table to fit $itemCount rows: height = $finalHeight")
+    else
+      // If no data, set a minimal height to show "No content in table" message
+      val emptyTableHeight = 100.0
+      leaderboardTable.setPrefHeight(emptyTableHeight)
+      leaderboardTable.setMaxHeight(emptyTableHeight)
+      leaderboardTable.setMinHeight(emptyTableHeight)
+      println("No data - set minimal table height")
 
   @FXML
   def handleBackToMenu(): Unit =

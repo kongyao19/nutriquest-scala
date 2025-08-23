@@ -9,6 +9,7 @@ import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.scene.Scene
+import scalafx.scene.image.Image
 import scalafx.scene.input.{KeyCode, KeyEvent}
 
 
@@ -38,6 +39,7 @@ object MainApp extends JFXApp3:
     // Initialize stage
     stage = new PrimaryStage:
       title = "NutriQuest🍌 - Nutrition Adventure Game"
+      icons += new Image(getClass.getResource("/nutriquest/images/sid.png").toExternalForm)
       resizable = true
       minWidth = 510 //800
       minHeight = 630//600

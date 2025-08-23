@@ -30,18 +30,18 @@
             <content>
                 <VBox fillWidth="true" spacing="15.0">
                     <children>
-                        <Label text="Objective:">
+                        <Label styleClass="instruction-text" text="Objective:">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
-                        <Label text="Move around the map and collect as many healthy foods as you can within 30 seconds. Each healthy food increases your score, while junk food decreases it. At the end, your score will be saved to the leaderboard." wrapText="true">
+                        <Label styleClass="instruction-text" text="Move around the map and collect as many healthy foods as you can within 30 seconds. Each healthy food increases your score, while junk food decreases it. At the end, your score will be saved to the leaderboard." wrapText="true">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
 
-                        <Label text="Controls:">
+                        <Label styleClass="instruction-text" text="Controls:">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
@@ -49,13 +49,13 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </Label>
-                        <Label text="Use WASD keys or the Arrow Keys to move your character around the map." wrapText="true">
+                        <Label styleClass="instruction-text" text="Use WASD keys or the Arrow Keys to move your character around the map." wrapText="true">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
 
-                        <Label text="Food Types &amp; Points:">
+                        <Label styleClass="instruction-text" text="Food Types &amp; Points:">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
@@ -63,13 +63,13 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </Label>
-                        <Label text="• Protein: +15 points&#10;• Vitamin: +12 points&#10;• Carbs: +10 points&#10;• Healthy Fats: +18 points&#10;• Junk Food: -10 points" wrapText="true">
+                        <Label styleClass="instruction-text" text="• Protein: +15 points&#10;• Vitamin: +12 points&#10;• Carbs: +10 points&#10;• Healthy Fats: +18 points&#10;• Junk Food: -10 points" wrapText="true">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
 
-                        <Label text="Game Mechanics:">
+                        <Label styleClass="instruction-text" text="Game Mechanics:">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
@@ -77,13 +77,13 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </Label>
-                        <Label text="You have 30 seconds to collect as much food as possible. When the timer ends, your final score is recorded in the leaderboard. Collect healthy food for higher scores, and avoid junk food to prevent losing points!" wrapText="true">
+                        <Label styleClass="instruction-text" text="You have 30 seconds to collect as much food as possible. When the timer ends, your final score is recorded in the leaderboard. Collect healthy food for higher scores, and avoid junk food to prevent losing points!" wrapText="true">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
 
-                        <Label text="Tips:">
+                        <Label styleClass="instruction-text" text="Tips:">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
@@ -91,7 +91,7 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </Label>
-                        <Label text="• Focus on high-value foods like Healthy Fats (+18) and Protein (+15)&#10;• Avoid Junk Food (-10) whenever possible&#10;• Keep moving quickly — you only have 30 seconds&#10;• Aim for the highest score to top the leaderboard!" wrapText="true">
+                        <Label styleClass="instruction-text" text="• Focus on high-value foods like Healthy Fats (+18) and Protein (+15)&#10;• Avoid Junk Food (-10) whenever possible&#10;• Keep moving quickly — you only have 30 seconds&#10;• Aim for the highest score to top the leaderboard!" wrapText="true">
                             <font>
                                 <Font size="14.0" />
                             </font>
