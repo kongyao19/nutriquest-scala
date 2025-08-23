@@ -1,0 +1,120 @@
+/* Global background */
+.root {
+    -fx-background-color: linear-gradient(to bottom, #1e1e2f, #2a2a40);
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-text-fill: #f5f5f5;
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #4facfe, #00f2fe);
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 8 16 8 16;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8,0,0,2);
+    -fx-transition: all 0.3s ease-in-out;
+}
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #43e97b, #38f9d7);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+.button:pressed {
+    -fx-background-color: #1fa2ff;
+}
+
+/* Labels */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #f0f0f0;
+}
+
+/* Titles / Headings */
+.title {
+    -fx-font-size: 32px;
+    -fx-text-fill: linear-gradient(to right, #00f2fe, #4facfe);
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 6,0,0,2);
+}
+
+.subtitle {
+    -fx-font-size: 18px;
+    -fx-text-fill: #cccccc;
+}
+
+/* TextField & Input */
+.text-field {
+    -fx-background-color: #2c2c40;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #bbbbbb;
+    -fx-background-radius: 6;
+    -fx-padding: 6;
+    -fx-border-color: #4facfe;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+}
+.text-field:focused {
+    -fx-border-color: #38f9d7;
+    -fx-background-color: #33334d;
+}
+
+/* TableView (for Leaderboard) */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #4facfe;
+    -fx-border-radius: 6;
+}
+.table-column {
+    -fx-text-fill: #f0f0f0;
+    -fx-alignment: CENTER;
+}
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #f5f5f5;
+}
+.table-row-cell:odd {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+}
+.table-row-cell:selected {
+    -fx-background-color: linear-gradient(to right, #00f2fe, #4facfe);
+    -fx-text-fill: black;
+}
+
+/* Game HUD labels */
+.hud-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffd700; /* gold */
+}
+
+/* MenuBar background */
+.menu-bar {
+    -fx-background-color: linear-gradient(to bottom, #2c2c40, #1e1e2f);
+}
+
+/* Top-level menu items (File, Edit, Help) */
+.menu {
+    -fx-text-fill: #f5f5f5;  /* light gray text */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Menu items (dropdown entries) */
+.menu-item {
+    -fx-background-color: #2c2c40;
+    -fx-text-fill: #f5f5f5;
+}
+
+.menu-item:hover {
+    -fx-background-color: linear-gradient(to right, #4facfe, #00f2fe);
+    -fx-text-fill: black;
+}
+
+.footer {
+    -fx-font-size: 12px;
+    -fx-text-fill: #888888;
+    -fx-font-style: italic;
+}

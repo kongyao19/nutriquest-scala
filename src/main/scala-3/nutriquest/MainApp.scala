@@ -39,13 +39,13 @@ object MainApp extends JFXApp3:
     stage = new PrimaryStage:
       title = "NutriQuest🍌 - Nutrition Adventure Game"
       resizable = true
-      minWidth = 800
-      minHeight = 600
-      width = 1200
-      height = 800
+      minWidth = 510 //800
+      minHeight = 630//600
+      width = 510 //1200
+      height = 630 //800
       scene = new Scene:
-//        stylesheets += getClass.getResource("view/GameTheme.css").toString
         root = roots
+        stylesheets += getClass.getResource("/nutriquest/Style.css").toExternalForm
 //        fill = Color.Black
 
         // Set up key event handling
@@ -101,7 +101,7 @@ object MainApp extends JFXApp3:
     loader.load()
     val controller = loader.getController[nutriquest.view.LeaderboardController]()
     controller.loadLeaderboard()
-    val leaderboardRoot = loader.getRoot[jfxs.layout.AnchorPane]
+    val leaderboardRoot = loader.getRoot[jfxs.layout.BorderPane]
     this.roots.center = leaderboardRoot
 
   def showGame(): Unit =
