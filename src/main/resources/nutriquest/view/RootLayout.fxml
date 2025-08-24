@@ -21,12 +21,18 @@
                 </Menu>
                 <Menu text="_Edit">
                     <items>
-                        <MenuItem onAction="#handleReset" text="_Reset" />
+                        <MenuItem onAction="#handleReset" text="_Reset">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                     </items>
                 </Menu>
                 <Menu text="_Help">
                     <items>
-                        <MenuItem onAction="#handleAbout" text="_About" />
+                        <MenuItem onAction="#handleAbout" text="_About">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                     </items>
                 </Menu>
             </menus>
