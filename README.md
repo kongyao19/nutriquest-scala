@@ -98,4 +98,6 @@ The challenges faced during development, particularly with scene transitions and
 **Course**: PRG2104 - Object Oriented Programming  
 **Academic Session**: April 2025
 
+---
+
 *This project was developed as part of an object oriented programming course, showcasing the practical application of OOP principles in game development.*
