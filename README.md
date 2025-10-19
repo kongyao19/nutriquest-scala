@@ -95,7 +95,7 @@ The challenges faced during development, particularly with scene transitions and
 
 **Developer**: Kong Yao
 
-**Institution**: Sunway University, Faculty of Engineering and Technology, BSc (Hons) Computer Science  
+**Institution**: Sunway University, Faculty of Engineering and Technology, BSc (Hons) in Computer Science  
 **Course**: PRG2104 - Object Oriented Programming  
 **Academic Session**: April 2025
 
