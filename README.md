@@ -41,8 +41,8 @@ sbt --version
 
 ### Clone the repository:
 ```bash
-git clone https://github.com/kongyao19/nutriquest.git
-cd nutriquest
+git clone https://github.com/kongyao19/nutriquest-scala.git
+cd nutriquest-scala
 ```
 
 ### Method 1: Run with SBT
