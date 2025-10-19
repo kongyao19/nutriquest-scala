@@ -100,4 +100,4 @@ The challenges faced during development, particularly with scene transitions and
 
 ---
 
-*This project was developed as part of an object oriented programming course, showcasing the practical application of OOP principles in game development.*
+*This project was developed as part of the Object Oriented Programming course, showcasing the practical application of OOP principles in game development.*
